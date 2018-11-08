@@ -44,31 +44,29 @@ public:
 		}
 	}
 
-	const char* getType()
+	string getType()
 	{
 		string ret = string("null");
 		if(rootNode == nullptr)
 		{
-			return ret.c_str();
+		    return("null");
 		}
 
 		if(rootNode->dataType == _INT_TYPE)
 		{
-			ret = string("int");
-			return ret.c_str();
+			return("int");
 		}
 		else if(rootNode->dataType == _FLOAT_TYPE)
 		{
-			ret = string("float");
-			return ret.c_str();
+			return("float");
 		}
 		else if(rootNode->dataType == _STRING_TYPE)
 		{
-			return "string";
+			return("string");
 		}
 		else
 		{
-			return " ";
+			return(" ");
 		}
 	}
 
@@ -88,20 +86,22 @@ private:
 
 		Node(DataType dt, void *pData)
 		{
-			if(dt == _INT_TYPE)
+		    dataType = dt;
+
+		    if(dt == _INT_TYPE)
 			{
 				int i = *(int*)(pData);
-				pData = new int(i);
+				this->pData = new int(i);
 			}
 			else if(dt == _FLOAT_TYPE)
 			{
 				float f = *(float*)(pData);
-				pData = new float(f);
+				this->pData = new float(f);
 			}
 			else if(dt == _FLOAT_TYPE)
 			{
 				string s = *(string*)(pData);
-				pData = new string(s);
+				this->pData = new string(s);
 			}
 		}
 		~Node(){}
@@ -122,10 +122,11 @@ int main()
 	string s = "abc";
 
 	tree.AddData("int", "10");
-	s = "int";
-	cout << "type=" << s << endl;
+	cout << "type=" << tree.getType() << endl;
+
 	tree.AddData("float", "3.14");
 	cout << "type=" << tree.getType() << endl;
+
 	tree.AddData("string", "string");
 	cout << "type=" << tree.getType() << endl;
 
