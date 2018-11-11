@@ -252,13 +252,15 @@ int main()
 
 	fstream inputFile("tree.ser");
 
+	string strFromFile;
+
 	if(inputFile)
 	{
 	    if(inputFile.is_open())
 	    {
-	        getline(inputFile, s);
+	        getline(inputFile, strFromFile);
 
-	        cout << s << endl;
+	        cout << strFromFile << endl;
 	    }
 	    else
 	    {
@@ -273,6 +275,36 @@ int main()
 	inputFile.close();
 
 // ------ string -------
+
+	cout << "strFromFile.size() = " << strFromFile.size() << endl;
+	cout << "strFromFile.length() = " << strFromFile.length() << endl;
+	cout << "strFromFile.empty() = " << strFromFile.empty() << endl;
+	const char *charStr = strFromFile.c_str();
+	cout << "charStr = " << charStr << endl;
+	cout << "strFromFile.substr(1, 5) = " << strFromFile.substr(1, 5) << endl;
+
+	string::size_type found = strFromFile.find("[");
+	cout << "found = " << found << endl;
+
+	found = strFromFile.find("[", found+1);
+	cout << "found = " << found << endl;
+//	found = strFromFile.find("[", found+1);
+//	cout << "found = " << found << endl;
+
+	cout << "strFromFile.substr(found, 5) = " << strFromFile.substr(found, 5) << endl;
+	cout << "strFromFile.substr(found) = " << strFromFile.substr(found) << endl;
+
+	cout << "strFromFile.rfind(\"[\") = " << strFromFile.rfind("[") << endl;
+
+	cout << "strFromFile.erase(found, 10) = " << strFromFile.erase(found, 10) << endl;
+
+	int pos = -1;
+
+	strFromFile.find_first_not_of("[", pos);
+
+	cout << pos << endl;
+
+
 
 
 	return 0;
