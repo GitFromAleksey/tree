@@ -237,7 +237,7 @@ int main()
 	tree.AddData("", "", "float", "3.14");
 	cout << "type=" << tree.getType() << endl;
 
-	tree.AddData("", "", "string", "string");
+	tree.AddData("", "", "string", "string_");
 	cout << "type=" << tree.getType() << endl;
 
 	if(tree.CheckData("string", "string"))
@@ -271,6 +271,9 @@ int main()
 	}
 
 	inputFile.close();
+
+// ------ string -------
+
 
 	return 0;
 }

@@ -45,7 +45,8 @@ public:
 		}
 		else if(tegChild == "string")
 		{// TODO: нужно разобраться как получить адрес ссылки, или решить как-то иначе
-			const string *d = &valChild;
+			string d = valChild;
+			cout << "d = " << valChild << endl;
 			//Node *newNode = new Node(_TYPE_STRING, d);
 			//this->rootNode = newNode;
 			res = true;
