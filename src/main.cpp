@@ -63,36 +63,53 @@ public:
         cout << "<- CheckBracketsCount" << endl;
     }
 
-    void getRootFromString(const string &parseStr)
+
+    void getRootsFromString(const string &parseStr)
     {
+        int bracketsCnt = 0;
+        int nodesCnt = 0;
+        string str_loc = parseStr;
+        int openPos = -1;
+        int closePos = -1;
+        string node = "";
+
         cout << "-> getRootFromString" << endl;
 
-        int posRightBr = -1;
-        int posLeftBr = -1;
-        string str_loc = parseStr;
-        string ret_str = "";
+        if( !CheckParseString(parseStr) ) return;
 
-        posLeftBr = str_loc.find(leftBracket, 0);
-        posRightBr = str_loc.rfind(rightBracket, str_loc.size());
+        for(unsigned int i = 0; i < str_loc.length(); i++)
+        {
+            if(str_loc.substr(i, 1) == leftBracket)
+            {
+            	if( openPos == -1 )
+            		{ openPos = i; }
+            	bracketsCnt++;
+            }
+            else if(str_loc.substr(i, 1) == rightBracket)
+            {
+            	bracketsCnt--;
+            	if(bracketsCnt == 0)
+            	{
+            		closePos = i+1;
+            		node = str_loc.substr(openPos, closePos - openPos);
+            		cout << "node = " << node << endl;
 
-        // TODO: вставить сюда CheckParseString
-        if(posLeftBr > 0)
-        { cout << "Bad data, posLeftBr > 0" << endl; return; }
-        if( (posRightBr+1) < str_loc.size() )
-        { cout << "Bad data, posRightBr < str_loc.size()" << endl; return; }
+            		openPos = -1;
+            		closePos = -1;
+            		node = "";
+            	}
+            }
+        }
 
-        str_loc.erase(posRightBr,1);
-        str_loc.erase(posLeftBr,1);
-
-        cout << "str_loc = " << str_loc << endl;
-
-        posLeftBr = str_loc.find(leftBracket, 0);
-
-        ret_str = str_loc.substr( 0, posLeftBr);
-
-        cout << "ret_str = " << ret_str << endl;
+        cout << "nodesCnt = " << nodesCnt << endl;
 
         cout << "<- getRootFromString" << endl;
+    }
+
+    // TODO: нужно сделать поиск поднодов
+    void getSubNodesFromString(const string &parseStr)
+    {
+
     }
 
     // подсчитывает корневые Node-ы
@@ -222,32 +239,9 @@ int main()
 
 // ------ string -------
 
-//	cout << "strFromFile.size() = " << strFromFile.size() << endl;
-//	cout << "strFromFile.length() = " << strFromFile.length() << endl;
-//	cout << "strFromFile.empty() = " << strFromFile.empty() << endl;
-//	const char *charStr = strFromFile.c_str();
-//	cout << "charStr = " << charStr << endl;
-//	cout << "strFromFile.substr(1, 5) = " << strFromFile.substr(1, 5) << endl;
-//
-//	string::size_type found = strFromFile.find("[");
-//	cout << "found = " << found << endl;
-//
-//	found = strFromFile.find("[", found+1);
-//	cout << "found = " << found << endl;
-////	found = strFromFile.find("[", found+1);
-////	cout << "found = " << found << endl;
-//
-//	cout << "strFromFile.substr(found, 5) = " << strFromFile.substr(found, 5) << endl;
-//	cout << "strFromFile.substr(found) = " << strFromFile.substr(found) << endl;
-//
-//	cout << "strFromFile.rfind(\"[\") = " << strFromFile.rfind("[") << endl;
-//
-////	cout << "strFromFile.erase(found, 10) = " << strFromFile.erase(found, 10) << endl;
-
-
     Parser prsr(strFromFile);
     prsr.CheckBracketsCount(strFromFile);
-    prsr.getRootFromString(strFromFile);
+    prsr.getRootsFromString(strFromFile);
     prsr.CountNodes(strFromFile);
 
 
