@@ -14,212 +14,158 @@
 using namespace std;
 
 
-//class Tree
-//{
-//public:
-//	Tree()
-//	{
-//		this->rootNode = nullptr;
-//	}
-//	~Tree(){}
-//
-//	bool AddData(const string &tegPrnt, const string &valPrnt, const string &tegChild, const string &valChild)
-//	{
-//		bool res = false;
-//
-//		if(tegChild == "int")
-//		{
-//			int d = stoi(valChild, 0);
-//			// convert string to int
-//			Node *newNode = new Node(_TYPE_INT, &d);
-//			this->rootNode = newNode;
-//			res = true;
-//		}
-//		else if(tegChild == "float")
-//		{
-//			float d = atof(valChild.c_str());
-//			// convert string to float
-//			Node *newNode = new Node(_TYPE_FLOAT, &d);
-//			this->rootNode = newNode;
-//			res = true;
-//		}
-//		else if(tegChild == "string")
-//		{
-//			string d = valChild;
-//			Node *newNode = new Node(_TYPE_STRING, &d);
-//			this->rootNode = newNode;
-//			res = true;
-//		}
-//
-//		return res;
-//	}
-//
-//	void BFS(void *rootNode)
-//	{
-//
-//	}
-//
-//	string getType()
-//	{
-//		string ret = string("null");
-//		if(rootNode == nullptr)
-//		{
-//		    return("null");
-//		}
-//
-//		if(rootNode->dataType == _TYPE_INT)
-//		{
-//			return("int");
-//		}
-//		else if(rootNode->dataType == _TYPE_FLOAT)
-//		{
-//			return("float");
-//		}
-//		else if(rootNode->dataType == _TYPE_STRING)
-//		{
-//			return("string");
-//		}
-//		else
-//		{
-//			return(" ");
-//		}
-//	}
-//
-//private:
-//
-//	const string teg_int = "int";
-//	const string teg_float = "float";
-//	const string teg_string = "string";
-//
-//	enum DataType
-//	{
-//		_TYPE_INT,
-//		_TYPE_FLOAT,
-//		_TYPE_STRING,
-//		_TYPE_NULL
-//	};
-//
-//	class Node
-//	{
-//	public:
-//		DataType dataType;
-//		void *pData;
-//		Node *pChild[3];
-//
-//		Node(DataType dt, void *pData)
-//		{
-//		    dataType = dt;
-//
-//		    if(dt == _TYPE_INT)
-//			{
-//				int i = *(int*)(pData);
-//				this->pData = new int(i);
-//			}
-//			else if(dt == _TYPE_FLOAT)
-//			{
-//				float f = *(float*)(pData);
-//				this->pData = new float(f);
-//			}
-//			else if(dt == _TYPE_FLOAT)
-//			{
-//				string s = *(string*)(pData);
-//				this->pData = new string(s);
-//			}
-//		}
-//		~Node(){}
-//	private:
-//	};
-//
-//	Node* FindNode(Node *root, const string &teg, const string &val)
-//	{
-//		Node *pRes = nullptr;
-//
-////		if()
-//		{
-//
-//		}
-//		return pRes;
-//	}
-//
-//	bool CompareNodeData(Node *pNode, const string &teg, const string &val)
-//	{
-//		bool res = false;
-//
-//		DataType dType = ConvertTegToDataType(teg);
-//
-//		if(pNode->dataType == dType)
-//		{
-//			if(CompareData(pNode, dType, val))
-//			{res = true; }
-//		}
-//
-//		return res;
-//	}
-//
-//	bool CompareData(Node *pNode, DataType dType, const string &val)
-//	{
-//		bool res = false;
-//
-//		if(dType == _TYPE_INT)
-//		{
-//			int data = *(int*)pNode->pData;
-//			if(data == ConvertToInt(val))
-//			{
-//				res = true;
-//			}
-//		}
-//		else if(dType == _TYPE_FLOAT)
-//		{
-//			float data = *(float*)pNode->pData;
-//			if(data == ConverttoFloat(val))
-//			{
-//				res = true;
-//			}
-//		}
-//		else if(dType == _TYPE_STRING)
-//		{
-//			string data = *(string*)pNode->pData;
-//			if(data == val)
-//			{
-//				res = true;
-//			}
-//		}
-//
-//		return res;
-//	}
-//
-//	int ConvertToInt(const string &val)
-//	{
-//		int d = stoi(val, 0);
-//		return d;
-//	}
-//
-//	float ConverttoFloat(const string &val)
-//	{
-//		float d = atof(val.c_str());
-//		return d;
-//	}
-//
-//	DataType ConvertTegToDataType(const string &teg)
-//	{
-//		if(teg_int == teg)
-//		{
-//			return _TYPE_INT;
-//		}
-//		else if(teg_float == teg)
-//		{
-//			return _TYPE_FLOAT;
-//		}
-//		else if(teg_string == teg)
-//		{
-//			return _TYPE_STRING;
-//		}
-//		return _TYPE_NULL;
-//	}
-//
-//	Node * rootNode;
-//
-//};
+class Parser
+{
+public:
+    Parser(const string &parseStr)
+    {
+        if(CheckParseString(parseStr))
+        { this->parseStr = parseStr; }
+    }
+    ~Parser(){}
+
+    void CheckBracketsCount(const string &parseStr)
+    {
+        int pos = -1;
+        int bracketsCnt = 0;
+        int leftBracketsCnt = 0;
+        int rightBracketsCnt = 0;
+
+        string str_loc = parseStr;
+
+        cout << "-> CheckBracketsCount" << endl;
+        cout << "str_loc = " << str_loc << endl;
+
+        while( (pos = str_loc.find(leftBracket, 0)) != -1 )
+        {
+            bracketsCnt++;
+            leftBracketsCnt++;
+            str_loc.erase(pos,1);
+//            cout << "str_loc = " << str_loc << endl;
+        }
+
+        while( (pos = str_loc.find(rightBracket, 0)) != -1 )
+        {
+            bracketsCnt--;
+            rightBracketsCnt++;
+            str_loc.erase(pos,1);
+//            cout << "str_loc = " << str_loc << endl;
+        }
+
+        cout << "leftBracketsCnt = "<< leftBracketsCnt << endl;
+        cout << "rightBracketsCnt = "<< rightBracketsCnt << endl;
+
+        if(bracketsCnt == 0)
+        {
+            cout << "string OK!" << endl;
+        }
+
+        cout << "<- CheckBracketsCount" << endl;
+    }
+
+    void getRootFromString(const string &parseStr)
+    {
+        cout << "-> getRootFromString" << endl;
+
+        int posRightBr = -1;
+        int posLeftBr = -1;
+        string str_loc = parseStr;
+        string ret_str = "";
+
+        posLeftBr = str_loc.find(leftBracket, 0);
+        posRightBr = str_loc.rfind(rightBracket, str_loc.size());
+
+        // TODO: вставить сюда CheckParseString
+        if(posLeftBr > 0)
+        { cout << "Bad data, posLeftBr > 0" << endl; return; }
+        if( (posRightBr+1) < str_loc.size() )
+        { cout << "Bad data, posRightBr < str_loc.size()" << endl; return; }
+
+        str_loc.erase(posRightBr,1);
+        str_loc.erase(posLeftBr,1);
+
+        cout << "str_loc = " << str_loc << endl;
+
+        posLeftBr = str_loc.find(leftBracket, 0);
+
+        ret_str = str_loc.substr( 0, posLeftBr);
+
+        cout << "ret_str = " << ret_str << endl;
+
+        cout << "<- getRootFromString" << endl;
+    }
+
+    // подсчитывает корневые Node-ы
+    void CountNodes(const string &parseStr)
+    {
+        int bracketsCnt = 0;
+        int nodesCnt = 0;
+        string str_loc = parseStr;
+
+        cout << "-> CountNodes" << endl;
+
+        if( !CheckParseString(parseStr) ) return;
+
+        for(unsigned int i = 0; i < str_loc.length(); i++)
+        {
+            if(str_loc.substr(i, 1) == leftBracket)
+            { bracketsCnt++; }
+            else if(str_loc.substr(i, 1) == rightBracket)
+            { bracketsCnt--; }
+
+            if(bracketsCnt == 0)
+            { nodesCnt++; }
+        }
+
+        cout << "nodesCnt = " << nodesCnt << endl;
+
+        cout << "<- CountNodes" << endl;
+    }
+
+    // проверка правильности формата строки
+    // TODO: пока проверка только на крайние скобки
+    // нужно сделать проверку на количество скобок
+    bool CheckParseString(const string &parseStr)
+    {
+        cout << "-> CheckParseString" << endl;
+
+        bool res = true;
+
+        int bracketsCnt = 0;
+        int posRightBr = -1;
+        int posLeftBr = -1;
+        string str_loc = parseStr;
+
+        posLeftBr = str_loc.find(leftBracket, 0);
+        posRightBr = str_loc.rfind(rightBracket, str_loc.size());
+
+        if(posLeftBr > 0)
+        { res = false; }
+        if( (posRightBr+1) < str_loc.size() )
+        { res = false; }
+
+        for(unsigned int i = 0; i < str_loc.length(); i++)
+        {
+            if(str_loc.substr(i, 1) == leftBracket)
+            { bracketsCnt++; }
+            else if(str_loc.substr(i, 1) == rightBracket)
+            { bracketsCnt--; }
+        }
+        if(bracketsCnt != 0)
+        { res = false; }
+
+        if(res == false){cout << "Bad data string!!!" << endl;}
+
+        cout << "<- CheckParseString" << endl;
+
+        return res;
+    }
+
+private:
+    string parseStr;
+    const string leftBracket = "[";
+    const string rightBracket = "]";
+};
 
 int main()
 {
@@ -260,7 +206,7 @@ int main()
 	    {
 	        getline(inputFile, strFromFile);
 
-	        cout << strFromFile << endl;
+	        cout << "Read data from file = " << strFromFile << endl;
 	    }
 	    else
 	    {
@@ -276,36 +222,36 @@ int main()
 
 // ------ string -------
 
-	cout << "strFromFile.size() = " << strFromFile.size() << endl;
-	cout << "strFromFile.length() = " << strFromFile.length() << endl;
-	cout << "strFromFile.empty() = " << strFromFile.empty() << endl;
-	const char *charStr = strFromFile.c_str();
-	cout << "charStr = " << charStr << endl;
-	cout << "strFromFile.substr(1, 5) = " << strFromFile.substr(1, 5) << endl;
-
-	string::size_type found = strFromFile.find("[");
-	cout << "found = " << found << endl;
-
-	found = strFromFile.find("[", found+1);
-	cout << "found = " << found << endl;
+//	cout << "strFromFile.size() = " << strFromFile.size() << endl;
+//	cout << "strFromFile.length() = " << strFromFile.length() << endl;
+//	cout << "strFromFile.empty() = " << strFromFile.empty() << endl;
+//	const char *charStr = strFromFile.c_str();
+//	cout << "charStr = " << charStr << endl;
+//	cout << "strFromFile.substr(1, 5) = " << strFromFile.substr(1, 5) << endl;
+//
+//	string::size_type found = strFromFile.find("[");
+//	cout << "found = " << found << endl;
+//
 //	found = strFromFile.find("[", found+1);
 //	cout << "found = " << found << endl;
+////	found = strFromFile.find("[", found+1);
+////	cout << "found = " << found << endl;
+//
+//	cout << "strFromFile.substr(found, 5) = " << strFromFile.substr(found, 5) << endl;
+//	cout << "strFromFile.substr(found) = " << strFromFile.substr(found) << endl;
+//
+//	cout << "strFromFile.rfind(\"[\") = " << strFromFile.rfind("[") << endl;
+//
+////	cout << "strFromFile.erase(found, 10) = " << strFromFile.erase(found, 10) << endl;
 
-	cout << "strFromFile.substr(found, 5) = " << strFromFile.substr(found, 5) << endl;
-	cout << "strFromFile.substr(found) = " << strFromFile.substr(found) << endl;
 
-	cout << "strFromFile.rfind(\"[\") = " << strFromFile.rfind("[") << endl;
-
-	cout << "strFromFile.erase(found, 10) = " << strFromFile.erase(found, 10) << endl;
-
-	int pos = -1;
-
-	strFromFile.find_first_not_of("[", pos);
-
-	cout << pos << endl;
-
+    Parser prsr(strFromFile);
+    prsr.CheckBracketsCount(strFromFile);
+    prsr.getRootFromString(strFromFile);
+    prsr.CountNodes(strFromFile);
 
 
 
 	return 0;
 }
+
