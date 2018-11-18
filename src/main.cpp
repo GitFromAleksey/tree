@@ -70,20 +70,27 @@ int main()
 
 // ------ string -------
 
-    Parser prsr(strFromFile);
-    prsr.CheckBracketsCount(strFromFile);
-    prsr.getRootsFromString(strFromFile);
-    prsr.CountNodes(strFromFile);
-    s = prsr.getDataStringFromRoot(strFromFile);
-    cout << s << endl;
-    prsr.getTegFromDataString(s);
-    prsr.getValFromDataString(s);
+    Parser prsr;
+//    prsr.CheckBracketsCount(strFromFile);
+//    prsr.getRootsFromString(strFromFile);
+//    prsr.CountNodes(strFromFile);
+//    s = prsr.getDataStringFromRoot(strFromFile);
+//    cout << s << endl;
+//    prsr.getTegFromDataString(s);
+//    prsr.getValFromDataString(s);
+
 
     vector<string> vStr = prsr.getSubNodesFromString(strFromFile);
 
     for(int i = 0; i < vStr.size(); i++)
     {
     	cout << "vStr[" << i << "] = " << vStr[i] << endl;
+    	string dataStr = prsr.getDataStringFromRoot(vStr[i]);
+    	cout << "dataStr = " << dataStr << endl;
+    	string teg = prsr.getTegFromDataString(dataStr);
+    	cout << "teg = " << teg << endl;
+    	string val = prsr.getValFromDataString(dataStr);
+    	cout << "val = " << val << endl;
     }
 
 

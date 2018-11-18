@@ -18,6 +18,7 @@
 class Parser
 {
 public:
+	Parser(){}
     Parser(const string &parseStr)
     {
         if(CheckParseString(parseStr))
@@ -71,7 +72,7 @@ public:
 
     // извлекает все roots корни из строки
     // TODO: возвращать результат в vector
-    void getRootsFromString(const string &parseStr)
+    vector<string> getRootsFromString(const string &parseStr)
     {
         int bracketsCnt = 0;
         int nodesCnt = 0;
@@ -79,10 +80,11 @@ public:
         int openPos = -1;
         int closePos = -1;
         string node = "";
+        vector<string> vStr;
 
         cout << "-> getRootFromString" << endl;
 
-        if( !CheckParseString(parseStr) ) return;
+        if( !CheckParseString(parseStr) ) return vStr;
 
         for(unsigned int i = 0; i < str_loc.length(); i++)
         {
@@ -99,6 +101,7 @@ public:
             	{
             		closePos = i+1;
             		node = str_loc.substr(openPos, closePos - openPos);
+            		vStr.push_back(node);
             		nodesCnt++;
             		cout << "node = " << node << endl;
 
@@ -112,6 +115,8 @@ public:
         cout << "nodesCnt = " << nodesCnt << endl;
 
         cout << "<- getRootFromString" << endl;
+
+        return vStr;
     }
 
     // извлекает поле с данными корня
@@ -121,7 +126,7 @@ public:
     	string rootDataStr = "";
     	int pos = -1;
 
-    	cout << "-> getDataStringFromRoot" << endl;
+//    	cout << "-> getDataStringFromRoot" << endl;
 
     	if( !CheckParseString(parseStr) ) return rootDataStr;
 
@@ -129,15 +134,24 @@ public:
     	{
     		str_loc.erase(0,1);
 
+    		// это случай когда в root есть под ноды
     		pos = str_loc.find(leftBracket, 0);
     		if(pos > -1)
     		{
     			rootDataStr = str_loc.substr(0, pos);
     			cout << "rootDataStr = " << rootDataStr << endl;
+    		}// этот случай, когда нет поднодов
+    		else
+    		{
+    			pos = str_loc.find(rightBracket, 0);
+    			if(pos > -1)
+    			{
+    				rootDataStr = str_loc.substr(0, pos);
+    			}
     		}
     	}
 
-    	cout << "<- getDataStringFromRoot" << endl;
+//    	cout << "<- getDataStringFromRoot" << endl;
 
     	return rootDataStr;
     }
@@ -159,7 +173,7 @@ public:
     		pos = str_loc.find(",",0);
 
     		resTag = str_loc.substr(0, pos);
-    		cout << "resTag = " << resTag << endl;
+//    		cout << "resTag = " << resTag << endl;
     	}
 
     	return resTag;
@@ -184,16 +198,16 @@ public:
 
     		resVal = str_loc;
 
-    		cout << "resVal = " << resVal << endl;
+//    		cout << "resVal = " << resVal << endl;
     	}
 
     	return resVal;
     }
 
-    // TODO: нужно сделать поиск поднодов
+    // возвращает список под нодов
     vector<string> getSubNodesFromString(const string &parseStr)
     {
-    	cout << "-> getSubNodesFromString" << endl;
+//    	cout << "-> getSubNodesFromString" << endl;
 
     	int pos = -1;
     	int bracketsCnt = 0;
@@ -212,7 +226,7 @@ public:
     	// удаляем всё до этой скобки
     	str_loc.erase(0, pos);
 
-    	cout << "str_loc = " << str_loc << endl;
+//    	cout << "str_loc = " << str_loc << endl;
 
     	pos = -1;
     	for(int i = 0; i < str_loc.length(); i++)
@@ -233,7 +247,7 @@ public:
     			nodaStr = str_loc.substr(pos, (i+1)-pos);
     			pos = -1;
 
-    			cout << "noda = " << nodaStr << endl;
+//    			cout << "noda = " << nodaStr << endl;
 
     			vectorRes.push_back(nodaStr);
     		}
@@ -244,7 +258,7 @@ public:
 //    		cout << "vectorRes[" << i << "] = " << vectorRes[i] << endl;
 //    	}
 
-    	cout << "<- getSubNodesFromString" << endl;
+//    	cout << "<- getSubNodesFromString" << endl;
 
     	return vectorRes;
     }
@@ -283,7 +297,7 @@ public:
     // нужно сделать проверку на количество скобок
     bool CheckParseString(const string &parseStr)
     {
-        cout << "-> CheckParseString" << endl;
+//        cout << "-> CheckParseString" << endl;
 
         bool res = true;
 
@@ -310,10 +324,10 @@ public:
         if(bracketsCnt != 0)
         { res = false; }
 
-        if(res == false){cout << "Bad data string!!!" << endl;}
-        else {cout << "ok data string!!!" << endl;}
+//        if(res == false){cout << "Bad data string!!!" << endl;}
+//        else {cout << "ok data string!!!" << endl;}
 
-        cout << "<- CheckParseString" << endl;
+//        cout << "<- CheckParseString" << endl;
 
         return res;
     }
