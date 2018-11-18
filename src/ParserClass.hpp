@@ -12,6 +12,7 @@
 //#include <fstream>
 //#include <typeinfo>
 #include <string>
+#include <vector>
 
 // test comment
 class Parser
@@ -24,6 +25,7 @@ public:
     }
     ~Parser(){}
 
+    // проверка количества скобок
     void CheckBracketsCount(const string &parseStr)
     {
         int pos = -1;
@@ -67,7 +69,8 @@ public:
         cout << "<- CheckBracketsCount" << endl;
     }
 
-
+    // извлекает все roots корни из строки
+    // TODO: возвращать результат в vector
     void getRootsFromString(const string &parseStr)
     {
         int bracketsCnt = 0;
@@ -111,6 +114,7 @@ public:
         cout << "<- getRootFromString" << endl;
     }
 
+    // извлекает поле с данными корня
     string getDataStringFromRoot(const string &parseStr)
     {
     	string str_loc = parseStr;
@@ -138,7 +142,8 @@ public:
     	return rootDataStr;
     }
 
-    string getTagFromDataString(const string &dataStr)
+    // возвращает поле "teg" из поля данных
+    string getTegFromDataString(const string &dataStr)
     {
     	int pos = -1;
     	string str_loc = dataStr;
@@ -160,6 +165,7 @@ public:
     	return resTag;
     }
 
+    // возвращает поле "val" из поля данных
     string getValFromDataString(const string &dataStr)
     {
     	int pos = -1;
@@ -185,13 +191,66 @@ public:
     }
 
     // TODO: нужно сделать поиск поднодов
-    void getSubNodesFromString(const string &parseStr)
+    vector<string> getSubNodesFromString(const string &parseStr)
     {
+    	cout << "-> getSubNodesFromString" << endl;
 
+    	int pos = -1;
+    	int bracketsCnt = 0;
+    	string str_loc = parseStr;
+    	string nodaStr = "";
+    	vector<string> vectorRes;
+
+    	if( !CheckParseString(parseStr) )return vectorRes;
+
+    	// удаляем внешние скобки
+    	str_loc.erase(0, 1);
+    	str_loc.erase(str_loc.length()-1, 1);
+
+    	// ищем первую открывающуюся скобку с начала строки
+    	pos = str_loc.find(leftBracket, 0);
+    	// удаляем всё до этой скобки
+    	str_loc.erase(0, pos);
+
+    	cout << "str_loc = " << str_loc << endl;
+
+    	pos = -1;
+    	for(int i = 0; i < str_loc.length(); i++)
+    	{
+    		// считаем открывающиеся и закрывающиеся скобки
+    		if(str_loc.substr(i, 1) == leftBracket)
+    		{
+    			bracketsCnt++;
+    			if(pos == -1)
+    			{pos = i;}
+    		}
+    		if(str_loc.substr(i, 1) == rightBracket)
+    		{bracketsCnt--;}
+
+    		// если количество скобок сравнялось, то это закрылась скобка нода
+    		if(bracketsCnt == 0)
+    		{
+    			nodaStr = str_loc.substr(pos, (i+1)-pos);
+    			pos = -1;
+
+    			cout << "noda = " << nodaStr << endl;
+
+    			vectorRes.push_back(nodaStr);
+    		}
+    	}
+
+//    	for(int i = 0; i < vectorRes.size(); i++)
+//    	{
+//    		cout << "vectorRes[" << i << "] = " << vectorRes[i] << endl;
+//    	}
+
+    	cout << "<- getSubNodesFromString" << endl;
+
+    	return vectorRes;
     }
 
-    // подсчитывает корневые Node-ы
-    void CountNodes(const string &parseStr)
+    // подсчитывает корневые Node-ы в строке
+    int CountNodes(const string &parseStr)
     {
         int bracketsCnt = 0;
         int nodesCnt = 0;
@@ -199,7 +258,7 @@ public:
 
         cout << "-> CountNodes" << endl;
 
-        if( !CheckParseString(parseStr) ) return;
+        if( !CheckParseString(parseStr) ) return 0;
 
         for(unsigned int i = 0; i < str_loc.length(); i++)
         {
@@ -215,6 +274,8 @@ public:
         cout << "nodesCnt = " << nodesCnt << endl;
 
         cout << "<- CountNodes" << endl;
+
+        return nodesCnt;
     }
 
     // проверка правильности формата строки

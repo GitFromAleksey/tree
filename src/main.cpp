@@ -76,8 +76,15 @@ int main()
     prsr.CountNodes(strFromFile);
     s = prsr.getDataStringFromRoot(strFromFile);
     cout << s << endl;
-    prsr.getTagFromDataString(s);
+    prsr.getTegFromDataString(s);
     prsr.getValFromDataString(s);
+
+    vector<string> vStr = prsr.getSubNodesFromString(strFromFile);
+
+    for(int i = 0; i < vStr.size(); i++)
+    {
+    	cout << "vStr[" << i << "] = " << vStr[i] << endl;
+    }
 
 
 	return 0;
