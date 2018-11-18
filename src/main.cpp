@@ -15,9 +15,37 @@
 using namespace std;
 
 
+void Deserialization(Tree *pTree, Parser *pPrsr, const string &str)
+{
+
+	int cntRootNodes = pPrsr->CountNodes(str);
+//	cout << "cntRootNodes = " << cntRootNodes << endl;
+
+	vector<string> rootStr = pPrsr->getRootsFromString(str);
+	for(int i = 0; i < rootStr.size(); i++)
+	{
+		cout << "rootStr[" << i << "]: " << rootStr[i] << endl;
+		vector<string> subNodes = pPrsr->getSubNodesFromString(rootStr[i]);
+		string dataStr = pPrsr->getDataStringFromRoot(rootStr[i]);
+		string teg = pPrsr->getTegFromDataString(dataStr);
+		string val = pPrsr->getValFromDataString(dataStr);
+//		cout << "rootTeg: " << teg << "; tegVal: " << val << endl;
+		for(int j = 0; j < subNodes.size(); j++)
+		{
+			cout << "subNodes[" << j << "]: " << subNodes[j] << endl;
+			if(subNodes[j].size() > 0)
+			{
+				Deserialization(pTree, pPrsr, subNodes[j]);
+			}
+		}
+	}
+
+}
+
 int main()
 {
 	Tree tree;
+	Parser prsr;
 
 //	int a = 10;
 //	float b = 3.14;
@@ -38,7 +66,6 @@ int main()
 	{
 		cout << "CheckData = true" << endl;
 	}
-
 
 // --------------------------------------------
 
@@ -68,31 +95,7 @@ int main()
 
 	inputFile.close();
 
-// ------ string -------
-
-    Parser prsr;
-//    prsr.CheckBracketsCount(strFromFile);
-//    prsr.getRootsFromString(strFromFile);
-//    prsr.CountNodes(strFromFile);
-//    s = prsr.getDataStringFromRoot(strFromFile);
-//    cout << s << endl;
-//    prsr.getTegFromDataString(s);
-//    prsr.getValFromDataString(s);
-
-
-    vector<string> vStr = prsr.getSubNodesFromString(strFromFile);
-
-    for(int i = 0; i < vStr.size(); i++)
-    {
-    	cout << "vStr[" << i << "] = " << vStr[i] << endl;
-    	string dataStr = prsr.getDataStringFromRoot(vStr[i]);
-    	cout << "dataStr = " << dataStr << endl;
-    	string teg = prsr.getTegFromDataString(dataStr);
-    	cout << "teg = " << teg << endl;
-    	string val = prsr.getValFromDataString(dataStr);
-    	cout << "val = " << val << endl;
-    }
-
+	Deserialization(&tree, &prsr, strFromFile);
 
 	return 0;
 }

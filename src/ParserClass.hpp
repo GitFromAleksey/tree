@@ -71,7 +71,6 @@ public:
     }
 
     // извлекает все roots корни из строки
-    // TODO: возвращать результат в vector
     vector<string> getRootsFromString(const string &parseStr)
     {
         int bracketsCnt = 0;
@@ -82,7 +81,7 @@ public:
         string node = "";
         vector<string> vStr;
 
-        cout << "-> getRootFromString" << endl;
+//        cout << "-> getRootFromString" << endl;
 
         if( !CheckParseString(parseStr) ) return vStr;
 
@@ -103,7 +102,7 @@ public:
             		node = str_loc.substr(openPos, closePos - openPos);
             		vStr.push_back(node);
             		nodesCnt++;
-            		cout << "node = " << node << endl;
+//            		cout << "node = " << node << endl;
 
             		openPos = -1;
             		closePos = -1;
@@ -112,9 +111,9 @@ public:
             }
         }
 
-        cout << "nodesCnt = " << nodesCnt << endl;
+//        cout << "nodesCnt = " << nodesCnt << endl;
 
-        cout << "<- getRootFromString" << endl;
+//        cout << "<- getRootFromString" << endl;
 
         return vStr;
     }
@@ -139,7 +138,7 @@ public:
     		if(pos > -1)
     		{
     			rootDataStr = str_loc.substr(0, pos);
-    			cout << "rootDataStr = " << rootDataStr << endl;
+//    			cout << "rootDataStr = " << rootDataStr << endl;
     		}// этот случай, когда нет поднодов
     		else
     		{
@@ -180,6 +179,8 @@ public:
     }
 
     // возвращает поле "val" из поля данных
+    // TODO: найден баг. Если отправить не строку с выделенными данными, астроку целиком,
+    // то возвращает строку со всеми нодами до конца строки
     string getValFromDataString(const string &dataStr)
     {
     	int pos = -1;
@@ -270,7 +271,7 @@ public:
         int nodesCnt = 0;
         string str_loc = parseStr;
 
-        cout << "-> CountNodes" << endl;
+//        cout << "-> CountNodes" << endl;
 
         if( !CheckParseString(parseStr) ) return 0;
 
@@ -285,9 +286,9 @@ public:
             { nodesCnt++; }
         }
 
-        cout << "nodesCnt = " << nodesCnt << endl;
+//        cout << "nodesCnt = " << nodesCnt << endl;
 
-        cout << "<- CountNodes" << endl;
+//        cout << "<- CountNodes" << endl;
 
         return nodesCnt;
     }
