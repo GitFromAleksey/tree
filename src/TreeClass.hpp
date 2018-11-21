@@ -232,7 +232,7 @@ private:
 		return _TYPE_NULL;
 	}
 
-	Node * rootNode;
+
 
 };
 

@@ -19,9 +19,9 @@ void Deserialization(Tree *pTree, Parser *pPrsr, const string &str)
 {
 
 	int cntRootNodes = pPrsr->CountNodes(str);
-//	cout << "cntRootNodes = " << cntRootNodes << endl;
 
 	vector<string> rootStr = pPrsr->getRootsFromString(str);
+
 	for(int i = 0; i < rootStr.size(); i++)
 	{
 		cout << "rootStr[" << i << "]: " << rootStr[i] << endl;
@@ -29,7 +29,7 @@ void Deserialization(Tree *pTree, Parser *pPrsr, const string &str)
 		string dataStr = pPrsr->getDataStringFromRoot(rootStr[i]);
 		string teg = pPrsr->getTegFromDataString(dataStr);
 		string val = pPrsr->getValFromDataString(dataStr);
-//		cout << "rootTeg: " << teg << "; tegVal: " << val << endl;
+
 		for(int j = 0; j < subNodes.size(); j++)
 		{
 			cout << "subNodes[" << j << "]: " << subNodes[j] << endl;
