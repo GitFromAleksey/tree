@@ -11,6 +11,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <string>
+#include "NodeClass.hpp"
 
 using namespace std;
 
@@ -22,6 +23,16 @@ public:
 		this->rootNode = nullptr;
 	}
 	~Tree(){}
+
+	Node *getRootNodePtr(void)
+	{
+		return this->rootNode;
+	}
+
+	void *CreateNode()
+	{
+
+	}
 
 	bool AddData(const string &tegPrnt, const string &valPrnt, const string &tegChild, const string &valChild)
 	{
@@ -98,50 +109,30 @@ public:
 		}
 	}
 
+	DataType ConvertTegToDataType(const string &teg)
+	{
+		if(teg_int == teg)
+		{
+			return _TYPE_INT;
+		}
+		else if(teg_float == teg)
+		{
+			return _TYPE_FLOAT;
+		}
+		else if(teg_string == teg)
+		{
+			return _TYPE_STRING;
+		}
+		return _TYPE_NULL;
+	}
+
 private:
 
 	const string teg_int = "int";
 	const string teg_float = "float";
 	const string teg_string = "string";
 
-	enum DataType
-	{
-		_TYPE_INT,
-		_TYPE_FLOAT,
-		_TYPE_STRING,
-		_TYPE_NULL
-	};
 
-	class Node
-	{
-	public:
-		DataType dataType;
-		void *pData;
-		Node *pChild[3];
-
-		Node(DataType dt, void *pData)
-		{
-		    dataType = dt;
-
-		    if(dt == _TYPE_INT)
-			{
-				int i = *(int*)(pData);
-				this->pData = new int(i);
-			}
-			else if(dt == _TYPE_FLOAT)
-			{
-				float f = *(float*)(pData);
-				this->pData = new float(f);
-			}
-			else if(dt == _TYPE_FLOAT)
-			{
-				string s = *(string*)(pData);
-				this->pData = new string(s);
-			}
-		}
-		~Node(){}
-	private:
-	};
 
 	Node* FindNode(Node *root, const string &teg, const string &val)
 	{
@@ -215,24 +206,24 @@ private:
 		return d;
 	}
 
-	DataType ConvertTegToDataType(const string &teg)
-	{
-		if(teg_int == teg)
-		{
-			return _TYPE_INT;
-		}
-		else if(teg_float == teg)
-		{
-			return _TYPE_FLOAT;
-		}
-		else if(teg_string == teg)
-		{
-			return _TYPE_STRING;
-		}
-		return _TYPE_NULL;
-	}
+//	DataType ConvertTegToDataType(const string &teg)
+//	{
+//		if(teg_int == teg)
+//		{
+//			return _TYPE_INT;
+//		}
+//		else if(teg_float == teg)
+//		{
+//			return _TYPE_FLOAT;
+//		}
+//		else if(teg_string == teg)
+//		{
+//			return _TYPE_STRING;
+//		}
+//		return _TYPE_NULL;
+//	}
 
-
+	Node *rootNode;
 
 };
 

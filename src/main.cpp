@@ -11,33 +11,32 @@
 
 #include "TreeClass.hpp"
 #include "ParserClass.hpp"
+#include "NodeClass.hpp"
 
 using namespace std;
 
 
-void Deserialization(Tree *pTree, Parser *pPrsr, const string &str)
+void Deserialization(Node *pNode, const string str)
 {
+	string str_log = str;
+	Parser parser;
 
-	int cntRootNodes = pPrsr->CountNodes(str);
-
-	vector<string> rootStr = pPrsr->getRootsFromString(str);
-
-	for(int i = 0; i < rootStr.size(); i++)
+	if(pNode == nullptr)
 	{
-		cout << "rootStr[" << i << "]: " << rootStr[i] << endl;
-		vector<string> subNodes = pPrsr->getSubNodesFromString(rootStr[i]);
-		string dataStr = pPrsr->getDataStringFromRoot(rootStr[i]);
-		string teg = pPrsr->getTegFromDataString(dataStr);
-		string val = pPrsr->getValFromDataString(dataStr);
+		string dataStr = parser.getDataStringFromRoot(str_log);
+		cout << dataStr << endl;
+		string teg = parser.getTegFromDataString(dataStr);
+		string val = parser.getValFromDataString(dataStr);
+		cout << "teg = " << teg << ", val = " << val << endl;
 
-		for(int j = 0; j < subNodes.size(); j++)
-		{
-			cout << "subNodes[" << j << "]: " << subNodes[j] << endl;
-			if(subNodes[j].size() > 0)
-			{
-				Deserialization(pTree, pPrsr, subNodes[j]);
-			}
-		}
+		Node *node = new Node(teg, val);
+
+		cout << "node->getTeg() = " << node->getTeg() << endl;
+		cout << "node->getVal() = " << node->getVal() << endl;
+	}
+	else
+	{
+
 	}
 
 }
@@ -51,21 +50,21 @@ int main()
 //	float b = 3.14;
 	string s = "abc";
 
-	tree.AddData("", "", "int", "10");
-	cout << "type=" << tree.getType() << endl;
-
-
-
-	tree.AddData("", "", "float", "3.14");
-	cout << "type=" << tree.getType() << endl;
-
-	tree.AddData("", "", "string", "string_");
-	cout << "type=" << tree.getType() << endl;
-
-	if(tree.CheckData("string", "string"))
-	{
-		cout << "CheckData = true" << endl;
-	}
+//	tree.AddData("", "", "int", "10");
+//	cout << "type=" << tree.getType() << endl;
+//
+//
+//
+//	tree.AddData("", "", "float", "3.14");
+//	cout << "type=" << tree.getType() << endl;
+//
+//	tree.AddData("", "", "string", "string_");
+//	cout << "type=" << tree.getType() << endl;
+//
+//	if(tree.CheckData("string", "string"))
+//	{
+//		cout << "CheckData = true" << endl;
+//	}
 
 // --------------------------------------------
 
@@ -95,7 +94,9 @@ int main()
 
 	inputFile.close();
 
-	Deserialization(&tree, &prsr, strFromFile);
+	// --------------------------------------------
+
+	Deserialization(tree.getRootNodePtr(), strFromFile);
 
 	return 0;
 }
