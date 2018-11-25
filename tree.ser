@@ -1,1 +1,1 @@
-[teg=string,val=root[teg=int,val=3[teg=float,val=3.14]][teg=int,val=4]]
+[teg=string,val=root[teg=int,val=3][teg=int,val=4[teg=float,val=4.4]]]
