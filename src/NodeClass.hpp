@@ -29,8 +29,8 @@ enum DataType
 
 		DataType dataType;
 		void *pData;
-		Node *pChild[3];
-		vector<Node*> vecChild;
+		string stringData;
+		vector<Node*> subNodes;
 
 		Node(const string &teg, const string &val)
 		{
@@ -48,7 +48,7 @@ enum DataType
 			}
 			else if(teg == teg_string)
 			{
-				pData = new string(teg);
+				pData = new string(val);
 				dataType = _TYPE_STRING;
 			}
 		}
@@ -67,7 +67,7 @@ enum DataType
 				float f = *(float*)(pData);
 				this->pData = new float(f);
 			}
-			else if(dt == _TYPE_FLOAT)
+			else if(dt == _TYPE_STRING)
 			{
 				string s = *(string*)(pData);
 				this->pData = new string(s);
@@ -75,6 +75,16 @@ enum DataType
 		}
 
 		~Node(){}
+
+		void AddSubNode(Node *node)
+		{
+			subNodes.push_back(node);
+		}
+
+		int getSubNodesCount(void)
+		{
+			return subNodes.size();
+		}
 
 		string getVal(void)
 		{
@@ -93,7 +103,7 @@ enum DataType
 			else if(dataType == _TYPE_STRING)
 			{
 				string s = *(string*)pData;
-				res = teg_string;
+				res = s;
 			}
 
 			return res;
@@ -122,7 +132,6 @@ enum DataType
 		}
 
 	private:
-
 
 		const string teg_int = "int";
 		const string teg_float = "float";

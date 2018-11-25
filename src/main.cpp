@@ -18,12 +18,12 @@ using namespace std;
 
 void Deserialization(Node *pNode, const string str)
 {
-	string str_log = str;
+	string str_loc = str;
 	Parser parser;
 
 	if(pNode == nullptr)
 	{
-		string dataStr = parser.getDataStringFromRoot(str_log);
+		string dataStr = parser.getDataStringFromRoot(str_loc);
 		cout << dataStr << endl;
 		string teg = parser.getTegFromDataString(dataStr);
 		string val = parser.getValFromDataString(dataStr);
@@ -33,10 +33,36 @@ void Deserialization(Node *pNode, const string str)
 
 		cout << "node->getTeg() = " << node->getTeg() << endl;
 		cout << "node->getVal() = " << node->getVal() << endl;
+
+		Deserialization(node, str_loc);
 	}
 	else
 	{
+		vector<string> subNodesStr = parser.getSubNodesFromString(str_loc);
 
+		for(int i = 0; i < subNodesStr.size(); i++)
+		{
+			cout << "subNodesStr[" << i << "] = " << subNodesStr[i] << endl;
+
+			string dataStr = parser.getDataStringFromRoot(subNodesStr[i]);
+			cout << dataStr << endl;
+			string teg = parser.getTegFromDataString(dataStr);
+			string val = parser.getValFromDataString(dataStr);
+
+			Node *subNode = new Node(teg,val);
+			pNode->AddSubNode(subNode);
+
+			vector<string> subSubNodes = parser.getSubNodesFromString(subNodesStr[i]);
+			if(subNodesStr.size() > 0)
+			{
+				for(int j = 0; j < subNodesStr.size(); j++)
+				{
+					Deserialization(subNode, subNodesStr[j]);
+				}
+			}
+		}
+
+		cout << "getSubNodesCount = " << pNode->getSubNodesCount() << endl;
 	}
 
 }
