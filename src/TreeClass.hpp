@@ -12,6 +12,7 @@
 #include <typeinfo>
 #include <string>
 #include "NodeClass.hpp"
+#include "ParserClass.hpp"
 
 using namespace std;
 
@@ -28,6 +29,10 @@ public:
 	{
 		return this->rootNode;
 	}
+
+	void Deserialization(Node *pNode, const string str);
+
+	string Serialization(Node *node);
 
 	void *CreateNode()
 	{
@@ -132,16 +137,10 @@ private:
 	const string teg_float = "float";
 	const string teg_string = "string";
 
-
-
 	Node* FindNode(Node *root, const string &teg, const string &val)
 	{
 		Node *pRes = nullptr;
 
-//		if()
-		{
-
-		}
 		return pRes;
 	}
 
@@ -205,23 +204,6 @@ private:
 		float d = atof(val.c_str());
 		return d;
 	}
-
-//	DataType ConvertTegToDataType(const string &teg)
-//	{
-//		if(teg_int == teg)
-//		{
-//			return _TYPE_INT;
-//		}
-//		else if(teg_float == teg)
-//		{
-//			return _TYPE_FLOAT;
-//		}
-//		else if(teg_string == teg)
-//		{
-//			return _TYPE_STRING;
-//		}
-//		return _TYPE_NULL;
-//	}
 
 	Node *rootNode;
 

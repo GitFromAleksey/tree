@@ -81,6 +81,11 @@ enum DataType
 			subNodes.push_back(node);
 		}
 
+		vector<Node*> getSubNodes(void)
+		{
+			return subNodes;
+		}
+
 		int getSubNodesCount(void)
 		{
 			return subNodes.size();
