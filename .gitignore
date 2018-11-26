@@ -33,3 +33,6 @@
 
 .project
 /Debug/
+
+*/*.exe
+*/*.o
