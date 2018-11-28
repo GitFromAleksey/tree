@@ -9,12 +9,10 @@
 #define PARSERCLASS_HPP_
 
 #include <iostream>
-//#include <fstream>
-//#include <typeinfo>
 #include <string>
 #include <vector>
 
-// test comment
+
 class Parser
 {
 public:
@@ -27,6 +25,7 @@ public:
     ~Parser(){}
 
     // проверка количества скобок
+    // TODO: недоделанный метод
     void CheckBracketsCount(const string &parseStr)
     {
         int pos = -1;
@@ -36,15 +35,14 @@ public:
 
         string str_loc = parseStr;
 
-        cout << "-> CheckBracketsCount" << endl;
-        cout << "str_loc = " << str_loc << endl;
+//        cout << "-> CheckBracketsCount" << endl;
+//        cout << "str_loc = " << str_loc << endl;
 
         while( (pos = str_loc.find(leftBracket, 0)) != -1 )
         {
             bracketsCnt++;
             leftBracketsCnt++;
             str_loc.erase(pos,1);
-//            cout << "str_loc = " << str_loc << endl;
         }
 
         while( (pos = str_loc.find(rightBracket, 0)) != -1 )
@@ -52,11 +50,10 @@ public:
             bracketsCnt--;
             rightBracketsCnt++;
             str_loc.erase(pos,1);
-//            cout << "str_loc = " << str_loc << endl;
         }
 
-        cout << "leftBracketsCnt = "<< leftBracketsCnt << endl;
-        cout << "rightBracketsCnt = "<< rightBracketsCnt << endl;
+//        cout << "leftBracketsCnt = "<< leftBracketsCnt << endl;
+//        cout << "rightBracketsCnt = "<< rightBracketsCnt << endl;
 
         if(bracketsCnt == 0)
         {
@@ -81,8 +78,6 @@ public:
         string node = "";
         vector<string> vStr;
 
-//        cout << "-> getRootFromString" << endl;
-
         if( !CheckParseString(parseStr) ) return vStr;
 
         for(unsigned int i = 0; i < str_loc.length(); i++)
@@ -102,7 +97,6 @@ public:
             		node = str_loc.substr(openPos, closePos - openPos);
             		vStr.push_back(node);
             		nodesCnt++;
-//            		cout << "node = " << node << endl;
 
             		openPos = -1;
             		closePos = -1;
@@ -110,10 +104,6 @@ public:
             	}
             }
         }
-
-//        cout << "nodesCnt = " << nodesCnt << endl;
-
-//        cout << "<- getRootFromString" << endl;
 
         return vStr;
     }
@@ -124,8 +114,6 @@ public:
     	string str_loc = parseStr;
     	string rootDataStr = "";
     	int pos = -1;
-
-//    	cout << "-> getDataStringFromRoot" << endl;
 
     	if( !CheckParseString(parseStr) ) return rootDataStr;
 
@@ -138,7 +126,6 @@ public:
     		if(pos > -1)
     		{
     			rootDataStr = str_loc.substr(0, pos);
-//    			cout << "rootDataStr = " << rootDataStr << endl;
     		}// этот случай, когда нет поднодов
     		else
     		{
@@ -149,8 +136,6 @@ public:
     			}
     		}
     	}
-
-//    	cout << "<- getDataStringFromRoot" << endl;
 
     	return rootDataStr;
     }
@@ -172,7 +157,6 @@ public:
     		pos = str_loc.find(",",0);
 
     		resTag = str_loc.substr(0, pos);
-//    		cout << "resTag = " << resTag << endl;
     	}
 
     	return resTag;
@@ -198,8 +182,6 @@ public:
     		str_loc.erase(0,pos+1);
 
     		resVal = str_loc;
-
-//    		cout << "resVal = " << resVal << endl;
     	}
 
     	return resVal;
@@ -208,8 +190,6 @@ public:
     // возвращает список под нодов
     vector<string> getSubNodesFromString(const string &parseStr)
     {
-//    	cout << "-> getSubNodesFromString" << endl;
-
     	int pos = -1;
     	int bracketsCnt = 0;
     	string str_loc = parseStr;
@@ -227,10 +207,8 @@ public:
     	// удаляем всё до этой скобки
     	str_loc.erase(0, pos);
 
-//    	cout << "str_loc = " << str_loc << endl;
-
     	pos = -1;
-    	for(int i = 0; i < str_loc.length(); i++)
+    	for(unsigned int i = 0; i < str_loc.length(); i++)
     	{
     		// считаем открывающиеся и закрывающиеся скобки
     		if(str_loc.substr(i, 1) == leftBracket)
@@ -248,18 +226,9 @@ public:
     			nodaStr = str_loc.substr(pos, (i+1)-pos);
     			pos = -1;
 
-//    			cout << "noda = " << nodaStr << endl;
-
     			vectorRes.push_back(nodaStr);
     		}
     	}
-
-//    	for(int i = 0; i < vectorRes.size(); i++)
-//    	{
-//    		cout << "vectorRes[" << i << "] = " << vectorRes[i] << endl;
-//    	}
-
-//    	cout << "<- getSubNodesFromString" << endl;
 
     	return vectorRes;
     }
@@ -270,8 +239,6 @@ public:
         int bracketsCnt = 0;
         int nodesCnt = 0;
         string str_loc = parseStr;
-
-//        cout << "-> CountNodes" << endl;
 
         if( !CheckParseString(parseStr) ) return 0;
 
@@ -286,10 +253,6 @@ public:
             { nodesCnt++; }
         }
 
-//        cout << "nodesCnt = " << nodesCnt << endl;
-
-//        cout << "<- CountNodes" << endl;
-
         return nodesCnt;
     }
 
@@ -298,8 +261,6 @@ public:
     // нужно сделать проверку на количество скобок
     bool CheckParseString(const string &parseStr)
     {
-//        cout << "-> CheckParseString" << endl;
-
         bool res = true;
 
         int bracketsCnt = 0;
@@ -324,11 +285,6 @@ public:
         }
         if(bracketsCnt != 0)
         { res = false; }
-
-//        if(res == false){cout << "Bad data string!!!" << endl;}
-//        else {cout << "ok data string!!!" << endl;}
-
-//        cout << "<- CheckParseString" << endl;
 
         return res;
     }

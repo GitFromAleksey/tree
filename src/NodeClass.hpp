@@ -27,10 +27,9 @@ enum DataType
 	{
 	public:
 
-		DataType dataType;
-		void *pData;
-		string stringData;
-		vector<Node*> subNodes;
+		DataType dataType;	// идентификатор хранимого типа данных
+		void *pData;	// указатель на хранимые данные
+		vector<Node*> subNodes;	// список указателей на подноды
 
 		Node(const string &teg, const string &val)
 		{
@@ -144,8 +143,6 @@ enum DataType
 
 		DataType ConvertTegToDataType(const string &teg)
 		{
-			DataType type = _TYPE_NULL;
-
 			if(teg_int == teg)
 			{
 				return _TYPE_INT;
