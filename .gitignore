@@ -34,5 +34,5 @@
 .project
 /Debug/
 
-Debug/*.exe
-Debug/src/*.o
+*/*.exe
+*/*.o
