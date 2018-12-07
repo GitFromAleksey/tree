@@ -30,48 +30,9 @@ enum DataType
 		DataType dataType;	// идентификатор хранимого типа данных
 		void *pData;	// указатель на хранимые данные
 		vector<Node*> subNodes;	// список указателей на подноды
+		// TODO: добавить указатель на родителя
 
-		Node(const string &teg, const string &val)
-		{
-			if(teg == teg_int)
-			{
-				int d = stoi(val, 0);
-				dataType = _TYPE_INT;
-				pData = new int(d);
-			}
-			else if(teg == teg_float)
-			{
-				float d = atof(val.c_str());
-				dataType = _TYPE_FLOAT;
-				pData = new float(d);
-			}
-			else if(teg == teg_string)
-			{
-				pData = new string(val);
-				dataType = _TYPE_STRING;
-			}
-		}
-
-		Node(DataType dt, void *pData)
-		{
-		    dataType = dt;
-
-		    if(dt == _TYPE_INT)
-			{
-				int i = *(int*)(pData);
-				this->pData = new int(i);
-			}
-			else if(dt == _TYPE_FLOAT)
-			{
-				float f = *(float*)(pData);
-				this->pData = new float(f);
-			}
-			else if(dt == _TYPE_STRING)
-			{
-				string s = *(string*)(pData);
-				this->pData = new string(s);
-			}
-		}
+		Node(const string &tag, const string &val);
 
 		~Node(){}
 
@@ -90,73 +51,17 @@ enum DataType
 			return subNodes.size();
 		}
 
-		string getVal(void)
-		{
-			string res = "";
+		string getVal(void);
 
-			if(dataType == _TYPE_INT)
-			{
-				int i = *(int*)pData;
-				res = to_string(i);
-			}
-			else if(dataType == _TYPE_FLOAT)
-			{
-				float f = *(float*)pData;
-				res = to_string(f);
-			}
-			else if(dataType == _TYPE_STRING)
-			{
-				string s = *(string*)pData;
-				res = s;
-			}
-
-			return res;
-		}
-
-		string getTeg(void)
-		{
-			string res = "";
-
-			switch(dataType)
-			{
-			case _TYPE_INT:
-				res = teg_int;
-				break;
-			case _TYPE_FLOAT:
-				res = teg_float;
-				break;
-			case _TYPE_STRING:
-				res = teg_string;
-				break;
-			default:
-				break;
-			}
-
-			return res;
-		}
+		string getTag(void);
 
 	private:
 
-		const string teg_int = "int";
-		const string teg_float = "float";
-		const string teg_string = "string";
+		const string tag_int = "int";
+		const string tag_float = "float";
+		const string tag_string = "string";
 
-		DataType ConvertTegToDataType(const string &teg)
-		{
-			if(teg_int == teg)
-			{
-				return _TYPE_INT;
-			}
-			else if(teg_float == teg)
-			{
-				return _TYPE_FLOAT;
-			}
-			else if(teg_string == teg)
-			{
-				return _TYPE_STRING;
-			}
-			return _TYPE_NULL;
-		}
+		DataType ConvertTagToDataType(const string &tag);
 
 	};
 

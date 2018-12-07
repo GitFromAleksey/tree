@@ -18,10 +18,10 @@ void Tree::Deserialization(Node *pNode, const string str)
 	if(this->rootNode == nullptr)
 	{
 		string dataStr = parser.getDataStringFromRoot(str_loc);
-		string teg = parser.getTegFromDataString(dataStr);
+		string tag = parser.getTagFromDataString(dataStr);
 		string val = parser.getValFromDataString(dataStr);
 
-		this->rootNode = new Node(teg, val);
+		this->rootNode = new Node(tag, val);
 
 		Deserialization(this->rootNode, str_loc);
 	}
@@ -32,10 +32,10 @@ void Tree::Deserialization(Node *pNode, const string str)
 		for(unsigned int i = 0; i < subNodesStr.size(); i++)
 		{
 			string dataStr = parser.getDataStringFromRoot(subNodesStr[i]);
-			string teg = parser.getTegFromDataString(dataStr);
+			string tag = parser.getTagFromDataString(dataStr);
 			string val = parser.getValFromDataString(dataStr);
 
-			Node *subNode = new Node(teg,val);
+			Node *subNode = new Node(tag,val);
 			pNode->AddSubNode(subNode);
 
 			if(parser.getSubNodesFromString(subNodesStr[i]).size() > 0)
@@ -50,7 +50,7 @@ string Tree::Serialization(Node *node)
 {
 	string str_res = "";
 
-	str_res += "[teg=" + node->getTeg() + ",val=" + node->getVal();
+	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
 	cout << "Serialization: " << str_res << endl;
 

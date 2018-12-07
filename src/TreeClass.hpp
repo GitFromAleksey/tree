@@ -42,9 +42,9 @@ public:
 
 private:
 
-	const string teg_int = "int";
-	const string teg_float = "float";
-	const string teg_string = "string";
+	const string tag_int = "int";
+	const string tag_float = "float";
+	const string tag_string = "string";
 
 	Node *rootNode;
 
