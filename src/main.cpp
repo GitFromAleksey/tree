@@ -15,17 +15,26 @@
 
 using namespace std;
 
+void SaveToFile(string fileName, string data)
+{
+	ofstream outputFile;
 
-int main()
+	outputFile.open(fileName.c_str(), ios::out);
+
+	outputFile.write((char*)data.c_str(), data.length());
+
+	outputFile.close();
+}
+
+int main(int argc, char *argv[])
 {
 	Tree tree;
 	Parser prsr;
-
 // --------------------------------------------
+	string inFilename = argv[1];
+	string outFilename = argv[2];
 
-	string filename = "tree.ser";
-
-	fstream inputFile("tree.ser");
+	fstream inputFile(inFilename);
 
 	string strFromFile;
 
@@ -36,6 +45,18 @@ int main()
 	        getline(inputFile, strFromFile);
 
 	        cout << "Read data from file = " << strFromFile << endl;
+
+	    	if(strFromFile.length() > 0)
+	    	{
+				tree.Deserialization(nullptr, strFromFile);
+				string outData = tree.Serialization(tree.getRootNodePtr());
+				cout << "tree.Serialization = " << outData << endl;
+				SaveToFile(outFilename, outData);
+	    	}
+	    	else
+	    	{
+	    		cout << "file is empty" << endl;
+	    	}
 	    }
 	    else
 	    {
@@ -51,9 +72,7 @@ int main()
 
 	// --------------------------------------------
 
-	tree.Deserialization(nullptr, strFromFile);
 
-	cout << "tree.Serialization = " << tree.Serialization(tree.getRootNodePtr()) << endl;
 
 
 	return 0;
