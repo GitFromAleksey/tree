@@ -26,6 +26,26 @@ void SaveToFile(string fileName, string data)
 	outputFile.close();
 }
 
+bool ReadFromFile(string fileName, string &strFromFile)
+{
+    bool res = false;
+
+    fstream inputFile(fileName);
+
+    if(inputFile)
+    {
+        if(inputFile.is_open())
+        {
+            res = true;
+            getline(inputFile, strFromFile);
+        }
+    }
+
+    inputFile.close();
+
+    return res;
+}
+
 int main(int argc, char *argv[])
 {
 	Tree tree;
@@ -34,41 +54,56 @@ int main(int argc, char *argv[])
 	string inFilename = argv[1];
 	string outFilename = argv[2];
 
-	fstream inputFile(inFilename);
+	string strFromFile = "";
 
-	string strFromFile;
-
-	if(inputFile)
+	if(ReadFromFile(inFilename, strFromFile))
 	{
-	    if(inputFile.is_open())
-	    {
-	        getline(inputFile, strFromFile);
+	    cout << "strFromFile: " << strFromFile << endl;
 
-	        cout << "Read data from file = " << strFromFile << endl;
-
-	    	if(strFromFile.length() > 0)
-	    	{
-				tree.Deserialization(nullptr, strFromFile);
-				string outData = tree.Serialization(tree.getRootNodePtr());
-				cout << "tree.Serialization = " << outData << endl;
-				SaveToFile(outFilename, outData);
-	    	}
-	    	else
-	    	{
-	    		cout << "file is empty" << endl;
-	    	}
-	    }
-	    else
+	    if(strFromFile.length() > 0)
 	    {
-	        cout << "is_open() = false" << endl;
+	        tree.Deserialization(nullptr, strFromFile);
+	        string outData = tree.Serialization(tree.getRootNodePtr());
+	        cout << "tree.Serialization = " << outData << endl;
+	        SaveToFile(outFilename, outData);
 	    }
 	}
-	else
-	{
-	    cout << "File not open" << endl;
-	}
 
-	inputFile.close();
+//	fstream inputFile(inFilename);
+//
+//	string strFromFile;
+//
+//	if(inputFile)
+//	{
+//	    if(inputFile.is_open())
+//	    {
+//	        getline(inputFile, strFromFile);
+//
+//	        cout << "Read data from file = " << strFromFile << endl;
+//
+//	    	if(strFromFile.length() > 0)
+//	    	{
+//				tree.Deserialization(nullptr, strFromFile);
+//				string outData = tree.Serialization(tree.getRootNodePtr());
+//				cout << "tree.Serialization = " << outData << endl;
+//				SaveToFile(outFilename, outData);
+//	    	}
+//	    	else
+//	    	{
+//	    		cout << "file is empty" << endl;
+//	    	}
+//	    }
+//	    else
+//	    {
+//	        cout << "is_open() = false" << endl;
+//	    }
+//	}
+//	else
+//	{
+//	    cout << "File not open" << endl;
+//	}
+//
+//	inputFile.close();
 
 	// --------------------------------------------
 
