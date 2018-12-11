@@ -34,11 +34,11 @@ public:
 
 	string Serialization(Node *node);
 
-	// обход дерева
-	void BFS(void *rootNode)
-	{
+	// печать дерева
+	string PrintTree(void);
 
-	}
+	// обход дерева
+	string TreeTraversal(Node *rootNode, int nestingLevel);
 
 private:
 

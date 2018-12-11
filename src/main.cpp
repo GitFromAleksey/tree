@@ -89,6 +89,8 @@ cout << logo << endl;
 	        string outData = tree.Serialization(tree.getRootNodePtr());
 	        cout << "tree.Serialization = " << outData << endl;
 	        SaveToFile(outFilename, outData);
+
+	        cout << tree.PrintTree() << endl;
 	    }
 	}
 

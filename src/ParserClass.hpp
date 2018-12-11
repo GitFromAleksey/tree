@@ -21,7 +21,9 @@ public:
     Parser(const string &parseStr)
     {
         if(CheckParseString(parseStr))
-        { this->parseStr = parseStr; }
+        {
+            this->parseStr = parseStr;
+        }
     }
     ~Parser(){}
 

@@ -66,3 +66,46 @@ string Tree::Serialization(Node *node)
 
 	return str_res;
 }
+
+string Tree::PrintTree(void)
+{
+    string res = "";
+    if(rootNode == nullptr)
+    {
+        return res;
+    }
+
+    res = TreeTraversal(this->rootNode, 0);
+
+    return res;
+}
+
+// обход дерева
+string Tree::TreeTraversal(Node *rootNode, int nestingLevel)
+{
+    string res = "";
+    string indent = "";
+
+    while(nestingLevel > 0)
+    {
+        indent += " ";
+        nestingLevel--;
+    }
+
+    if(rootNode == nullptr){return res;}
+
+    res = rootNode->getTag() + ";";
+    res += rootNode->getVal() + "\n";
+
+    if(rootNode->getSubNodesCount() > 0)
+    {
+        vector<Node*> subNodes = rootNode->getSubNodes();
+
+        for(unsigned int i = 0; i < subNodes.size(); i++)
+        {
+            res += " " + TreeTraversal(subNodes[i], nestingLevel+1);
+        }
+    }
+
+    return res;
+}
