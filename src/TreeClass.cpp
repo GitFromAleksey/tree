@@ -81,20 +81,21 @@ string Tree::PrintTree(void)
 }
 
 // обход дерева
-string Tree::TreeTraversal(Node *rootNode, int nestingLevel)
+string Tree::TreeTraversal(Node *rootNode, unsigned int nestingLevel)
 {
     string res = "";
     string indent = "";
+    unsigned int nes_lev = nestingLevel;
 
-    while(nestingLevel > 0)
+    while(nes_lev > 0)
     {
         indent += " ";
-        nestingLevel--;
+        nes_lev--;
     }
 
     if(rootNode == nullptr){return res;}
 
-    res = rootNode->getTag() + ";";
+    res = indent + "L" + rootNode->getTag() + ";";
     res += rootNode->getVal() + "\n";
 
     if(rootNode->getSubNodesCount() > 0)
@@ -103,7 +104,7 @@ string Tree::TreeTraversal(Node *rootNode, int nestingLevel)
 
         for(unsigned int i = 0; i < subNodes.size(); i++)
         {
-            res += " " + TreeTraversal(subNodes[i], nestingLevel+1);
+            res += TreeTraversal(subNodes[i], (nestingLevel+1));
         }
     }
 

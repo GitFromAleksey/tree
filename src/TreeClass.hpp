@@ -38,7 +38,7 @@ public:
 	string PrintTree(void);
 
 	// обход дерева
-	string TreeTraversal(Node *rootNode, int nestingLevel);
+	string TreeTraversal(Node *rootNode, unsigned int nestingLevel);
 
 private:
 

@@ -68,7 +68,7 @@ cout << logo << endl;
 
 	if(argc < 3)
 	{
-		inFilename = "";
+		inFilename = "tree.ser";
 		outFilename = "";
 	}
 	else
