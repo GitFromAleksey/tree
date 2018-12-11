@@ -51,8 +51,19 @@ int main(int argc, char *argv[])
 	Tree tree;
 	Parser prsr;
 // --------------------------------------------
-	string inFilename = argv[1];
-	string outFilename = argv[2];
+	string inFilename = "";
+	string outFilename = "";
+
+	if(argc < 3)
+	{
+		inFilename = "";
+		outFilename = "";
+	}
+	else
+	{
+		inFilename = argv[1];
+		outFilename = argv[2];
+	}
 
 	string strFromFile = "";
 

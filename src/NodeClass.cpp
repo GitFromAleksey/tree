@@ -28,6 +28,27 @@ Node::Node(const string &tag, const string &val)
     }
 }
 
+Node::Node(const Node *pParent, const string &tag, const string &val)
+{
+    if(tag == tag_int)
+    {
+        int d = stoi(val, 0);
+        dataType = _TYPE_INT;
+        pData = new int(d);
+    }
+    else if(tag == tag_float)
+    {
+        float d = atof(val.c_str());
+        dataType = _TYPE_FLOAT;
+        pData = new float(d);
+    }
+    else if(tag == tag_string)
+    {
+        pData = new string(val);
+        dataType = _TYPE_STRING;
+    }
+}
+
 string Node::getVal()
 {
     string res = "";

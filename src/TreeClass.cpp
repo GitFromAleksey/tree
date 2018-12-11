@@ -21,7 +21,8 @@ void Tree::Deserialization(Node *pNode, const string str)
 		string tag = parser.getTagFromDataString(dataStr);
 		string val = parser.getValFromDataString(dataStr);
 
-		this->rootNode = new Node(tag, val);
+//		this->rootNode = new Node(tag, val);
+		this->rootNode = new Node(nullptr, tag, val);
 
 		Deserialization(this->rootNode, str_loc);
 	}
@@ -35,7 +36,8 @@ void Tree::Deserialization(Node *pNode, const string str)
 			string tag = parser.getTagFromDataString(dataStr);
 			string val = parser.getValFromDataString(dataStr);
 
-			Node *subNode = new Node(tag,val);
+//			Node *subNode = new Node(tag,val);
+			Node *subNode = new Node(pNode, tag, val);
 			pNode->AddSubNode(subNode);
 
 			if(parser.getSubNodesFromString(subNodesStr[i]).size() > 0)

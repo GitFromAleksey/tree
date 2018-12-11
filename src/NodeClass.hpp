@@ -27,14 +27,24 @@ enum DataType
 	{
 	public:
 
+		// TODO: убрать в private
 		DataType dataType;	// идентификатор хранимого типа данных
+		// TODO: убрать в private
 		void *pData;	// указатель на хранимые данные
+		// TODO: убрать в private
+		Node *pParent; // указатель на родителя
+		// TODO: убрать в private
 		vector<Node*> subNodes;	// список указателей на подноды
-		// TODO: добавить указатель на родителя
 
+		Node(){}
 		Node(const string &tag, const string &val);
-
+		Node(const Node *pParent, const string &tag, const string &val);
 		~Node(){}
+
+		void AddParent(Node *pParent)
+		{
+			this->pParent = pParent;
+		}
 
 		void AddSubNode(Node *node)
 		{
