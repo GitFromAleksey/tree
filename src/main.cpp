@@ -15,6 +15,16 @@
 
 using namespace std;
 
+const string logo = "\n   ___\n\
+ /'___`\\           __            \n\
+/\\_\\ /\\ \\     __  /\\_\\     ____  \n\
+\\/_/// /__  /'_ `\\\\/\\ \\   /',__\\ \n\
+   // /_\\ \\/\\ \\L\\ \\\\ \\ \\ /\\__, `\\\n\
+  /\\______/\\ \\____ \\\\ \\_\\\\/\\____/\n\
+  \\/_____/  \\/___L\\ \\\\/_/ \\/___/ \n\
+              /\\____/            \n\
+              \\/___/             ";
+
 void SaveToFile(string fileName, string data)
 {
 	ofstream outputFile;
@@ -48,7 +58,9 @@ bool ReadFromFile(string fileName, string &strFromFile)
 
 int main(int argc, char *argv[])
 {
-	Tree tree;
+cout << logo << endl;
+
+    Tree tree;
 	Parser prsr;
 // --------------------------------------------
 	string inFilename = "";
