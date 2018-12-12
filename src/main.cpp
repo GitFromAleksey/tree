@@ -94,42 +94,6 @@ cout << logo << endl;
 	    }
 	}
 
-//	fstream inputFile(inFilename);
-//
-//	string strFromFile;
-//
-//	if(inputFile)
-//	{
-//	    if(inputFile.is_open())
-//	    {
-//	        getline(inputFile, strFromFile);
-//
-//	        cout << "Read data from file = " << strFromFile << endl;
-//
-//	    	if(strFromFile.length() > 0)
-//	    	{
-//				tree.Deserialization(nullptr, strFromFile);
-//				string outData = tree.Serialization(tree.getRootNodePtr());
-//				cout << "tree.Serialization = " << outData << endl;
-//				SaveToFile(outFilename, outData);
-//	    	}
-//	    	else
-//	    	{
-//	    		cout << "file is empty" << endl;
-//	    	}
-//	    }
-//	    else
-//	    {
-//	        cout << "is_open() = false" << endl;
-//	    }
-//	}
-//	else
-//	{
-//	    cout << "File not open" << endl;
-//	}
-//
-//	inputFile.close();
-
 	// --------------------------------------------
 
 
