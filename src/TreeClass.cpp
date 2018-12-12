@@ -13,7 +13,7 @@ void Tree::Deserialization(Node *pNode, const string str)
 	string str_loc = str;
 	Parser parser;
 
-	cout << "Des. input str: " << str << endl;
+//	cout << "Des. input str: " << str << endl;
 
 	if(this->rootNode == nullptr)
 	{
@@ -21,7 +21,6 @@ void Tree::Deserialization(Node *pNode, const string str)
 		string tag = parser.getTagFromDataString(dataStr);
 		string val = parser.getValFromDataString(dataStr);
 
-//		this->rootNode = new Node(tag, val);
 		this->rootNode = new Node(nullptr, tag, val);
 
 		Deserialization(this->rootNode, str_loc);
@@ -36,7 +35,6 @@ void Tree::Deserialization(Node *pNode, const string str)
 			string tag = parser.getTagFromDataString(dataStr);
 			string val = parser.getValFromDataString(dataStr);
 
-//			Node *subNode = new Node(tag,val);
 			Node *subNode = new Node(pNode, tag, val);
 			pNode->AddSubNode(subNode);
 
@@ -54,7 +52,7 @@ string Tree::Serialization(Node *node)
 
 	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
-	cout << "Serialization: " << str_res << endl;
+//	cout << "Serialization: " << str_res << endl;
 
 	vector<Node*> subNodes = node->getSubNodes();
 	for(unsigned int i = 0; i < subNodes.size(); i++)
