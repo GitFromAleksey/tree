@@ -23,7 +23,7 @@ const string logo = "\n   ___\n\
   /\\______/\\ \\____ \\\\ \\_\\\\/\\____/\n\
   \\/_____/  \\/___L\\ \\\\/_/ \\/___/ \n\
               /\\____/            \n\
-              \\/___/             ";
+              \\/___/             \n\n";
 
 void SaveToFile(string fileName, string data)
 {
@@ -58,26 +58,42 @@ bool ReadFromFile(string fileName, string &strFromFile)
 
 int main(int argc, char *argv[])
 {
-cout << logo << endl;
+    cout << logo << endl;
 
     Tree tree;
 	Parser prsr;
 // --------------------------------------------
+
+	// имя файла для чтения
 	string inFilename = "";
+	// имя файла для вывода
 	string outFilename = "";
 
-	if(argc < 3)
+	// переменна для хранения содержимого входного файла
+	string strFromFile = "";
+
+	// проверка корректронсти параметров командной строки
+	if(argc == 3)
 	{
-		inFilename = "tree.ser";
-		outFilename = "";
+        inFilename = argv[1];
+        outFilename = argv[2];
 	}
 	else
 	{
-		inFilename = argv[1];
-		outFilename = argv[2];
+	    cout << "Wrong command line parameters!" << endl;
+	    return 0;
 	}
 
-	string strFromFile = "";
+//
+//	while()
+//	{
+//	    string str = cin();
+//
+//	    if(str.size() == 0)
+//	    {
+//	        break;
+//	    }
+//	}
 
 	if(ReadFromFile(inFilename, strFromFile))
 	{
