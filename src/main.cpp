@@ -77,41 +77,52 @@ int main(int argc, char *argv[])
 	{
         inFilename = argv[1];
         outFilename = argv[2];
-	}
-	else
-	{
-	    cout << "Wrong command line parameters!" << endl;
-	    return 0;
+
+        cout << "Input file name: " << inFilename << endl;
+        cout << "Output file name: " << outFilename << endl;
 	}
 
-//
-//	while()
+
+	while(1)
+	{
+	    bool quit = false;
+	    int choice = 0;
+
+	    cout << "(1)read from input file and deserealization" << endl;
+	    cout << "(2)serealization and write to output file" << endl;
+	    cout << "(3)print tree" << endl;
+	    cout << "(0)quit" << endl;
+
+	    cin >> choice;
+
+	    switch(choice)
+	    {
+	    case 0:
+	        quit = true;
+	        break;
+	    }
+
+	    if(quit)break;
+	}
+
+//	if(ReadFromFile(inFilename, strFromFile))
 //	{
-//	    string str = cin();
+//	    cout << "strFromFile: " << strFromFile << endl;
 //
-//	    if(str.size() == 0)
+//	    if(strFromFile.length() > 0)
 //	    {
-//	        break;
+//	        tree.Deserialization(nullptr, strFromFile);
+//	        string outData = tree.Serialization(tree.getRootNodePtr());
+//	        cout << "tree.Serialization = " << outData << endl;
+//	        SaveToFile(outFilename, outData);
+//
+//	        cout << tree.PrintTree() << endl;
 //	    }
 //	}
 
-	if(ReadFromFile(inFilename, strFromFile))
-	{
-	    cout << "strFromFile: " << strFromFile << endl;
-
-	    if(strFromFile.length() > 0)
-	    {
-	        tree.Deserialization(nullptr, strFromFile);
-	        string outData = tree.Serialization(tree.getRootNodePtr());
-	        cout << "tree.Serialization = " << outData << endl;
-	        SaveToFile(outFilename, outData);
-
-	        cout << tree.PrintTree() << endl;
-	    }
-	}
-
 	// --------------------------------------------
 
+	cout << "Close program" << endl;
 
 	return 0;
 }
