@@ -50,6 +50,8 @@ string Tree::Serialization(Node *node)
 {
 	string str_res = "";
 
+	if(node == nullptr)return str_res;
+
 	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
 //	cout << "Serialization: " << str_res << endl;

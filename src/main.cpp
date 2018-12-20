@@ -23,17 +23,27 @@ const string logo = "\n   ___\n\
   /\\______/\\ \\____ \\\\ \\_\\\\/\\____/\n\
   \\/_____/  \\/___L\\ \\\\/_/ \\/___/ \n\
               /\\____/            \n\
-              \\/___/             \n\n";
+              \\/___/             \n";
 
-void SaveToFile(string fileName, string data)
+bool SaveToFile(string fileName, string data)
 {
 	ofstream outputFile;
 
+	if(fileName.size() == 0){return false;}
+
 	outputFile.open(fileName.c_str(), ios::out);
 
-	outputFile.write((char*)data.c_str(), data.length());
+	if(outputFile.is_open())
+	{
+	    outputFile.write((char*)data.c_str(), data.length());
+	    outputFile.close();
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
 
-	outputFile.close();
 }
 
 bool ReadFromFile(string fileName, string &strFromFile)
@@ -58,8 +68,6 @@ bool ReadFromFile(string fileName, string &strFromFile)
 
 int main(int argc, char *argv[])
 {
-
-
     Tree tree;
 	Parser prsr;
 // --------------------------------------------
@@ -72,22 +80,23 @@ int main(int argc, char *argv[])
 	// переменна для хранения содержимого входного файла
 	string strFromFile = "";
 
+    // буфер для вывода информации на экран
+	string displayedData = "";
+
 	// проверка корректронсти параметров командной строки
 	if(argc == 3)
 	{
         inFilename = argv[1];
         outFilename = argv[2];
 
-        cout << "Input file name: " << inFilename << endl;
-        cout << "Output file name: " << outFilename << endl;
+        displayedData += "\nInput file name: " + inFilename;
+        displayedData += "\nOutput file name: " + outFilename;
 	}
 	else
 	{
-	    cout << "Pleas enter input and output file names.\n" << endl;
+	    displayedData += "\nInput and output file names are not specified.";
+	    displayedData += "\nPleas enter input and output file names.\n";
 	}
-
-
-	string displayedData = "";
 
 	while(1)
 	{
@@ -108,6 +117,8 @@ int main(int argc, char *argv[])
 
 	    cout << "\n" << displayedData << endl;
 	    displayedData = "";
+
+	    cout << "\nYour choice?" << endl;
 
 	    cin >> choice;
 
@@ -133,18 +144,50 @@ int main(int argc, char *argv[])
                     tree.Deserialization(nullptr, strFromFile);
                     displayedData += "\nDeserialization ok";
                 }
+                else
+                {
+                    displayedData += "\nInput file contains no data.";
+                }
+            }
+            else
+            {
+                displayedData += "\nFile reading error.";
             }
             break;
         case 'p':
-            displayedData += "\n" + tree.PrintTree();
+            displayedData += "\nPrint tree: \n";
+            temp = tree.PrintTree();
+            if(temp.size() == 0)
+            {
+                displayedData += "\nNothing to print.";
+            }
+            else
+            {
+                displayedData += "\n" + tree.PrintTree();
+            }
             break;
         case 's':
             temp = tree.Serialization(tree.getRootNodePtr());
-            displayedData += "\nSerialization ok";
-            displayedData += "\nSerialization string";
-            displayedData += "\n" + temp;
-            SaveToFile(outFilename, temp);
-            displayedData += "\nSerialization save to file ok";
+
+            if(temp.size() > 0)
+            {
+                displayedData += "\nSerialization string:";
+                displayedData += "\n" + temp;
+                displayedData += "\nSerialization ok.";
+
+                if(SaveToFile(outFilename, temp))
+                {
+                    displayedData += "\nSerialization save to file ok";
+                }
+                else
+                {
+                    displayedData += "\nSerialization save to file error";
+                }
+            }
+            else
+            {
+                displayedData += "\nSerialization error";
+            }
             break;
 	    case 'q':
 	        quit = true;
@@ -156,7 +199,8 @@ int main(int argc, char *argv[])
 
 	// --------------------------------------------
 
-	cout << "Close program" << endl;
+	cout << "\nClose program\n" << endl;
+	system("pause");
 
 	return 0;
 }
