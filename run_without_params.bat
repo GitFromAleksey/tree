@@ -1,2 +1,1 @@
-Debug\tree.exe
-pause
+C:\WorkSpace\Tree\Debug\tree.exe

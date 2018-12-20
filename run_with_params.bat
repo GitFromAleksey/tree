@@ -1,2 +1,1 @@
-Debug\tree.exe tree.ser out.ser
-pause
+C:\WorkSpace\Tree\Debug\tree.exe tree.ser out.ser
