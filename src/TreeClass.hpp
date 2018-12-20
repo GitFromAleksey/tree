@@ -30,6 +30,7 @@ public:
 		return this->rootNode;
 	}
 
+	// TODO: сделать булевую для возврата результата серилиализации
 	void Deserialization(Node *pNode, const string str);
 
 	string Serialization(Node *node);

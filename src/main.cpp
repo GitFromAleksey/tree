@@ -58,7 +58,7 @@ bool ReadFromFile(string fileName, string &strFromFile)
 
 int main(int argc, char *argv[])
 {
-    cout << logo << endl;
+
 
     Tree tree;
 	Parser prsr;
@@ -81,44 +81,78 @@ int main(int argc, char *argv[])
         cout << "Input file name: " << inFilename << endl;
         cout << "Output file name: " << outFilename << endl;
 	}
+	else
+	{
+	    cout << "Pleas enter input and output file names.\n" << endl;
+	}
 
+
+	string displayedData = "";
 
 	while(1)
 	{
 	    bool quit = false;
-	    int choice = 0;
+	    char choice = 0;
+	    string temp = "";
 
-	    cout << "(1)read from input file and deserealization" << endl;
-	    cout << "(2)serealization and write to output file" << endl;
-	    cout << "(3)print tree" << endl;
-	    cout << "(0)quit" << endl;
+	    system("cls");
+
+	    cout << logo << endl;
+
+	    cout << "\n(i)set input file name" << endl;
+	    cout << "(o)set output file name" << endl;
+	    cout << "(r)read from input file and deserealization" << endl;
+	    cout << "(s)serealization and write to output file" << endl;
+	    cout << "(p)print tree" << endl;
+	    cout << "(q)quit" << endl;
+
+	    cout << "\n" << displayedData << endl;
+	    displayedData = "";
 
 	    cin >> choice;
 
 	    switch(choice)
 	    {
-	    case 0:
+	    case 'i':
+	        cout << "Enter input file name:" << endl;
+	        cin >> inFilename;
+	        displayedData += "\nInput file name is: " + inFilename;
+	        break;
+        case 'o':
+            cout << "Enter output file name:" << endl;
+            cin >> outFilename;
+            displayedData += "\nOutput file name is: " + outFilename;
+            break;
+        case 'r':
+            if(ReadFromFile(inFilename, strFromFile))
+            {
+                displayedData += "\nInput file content: \n" + strFromFile;
+
+                if(strFromFile.length() > 0)
+                {
+                    tree.Deserialization(nullptr, strFromFile);
+                    displayedData += "\nDeserialization ok";
+                }
+            }
+            break;
+        case 'p':
+            displayedData += "\n" + tree.PrintTree();
+            break;
+        case 's':
+            temp = tree.Serialization(tree.getRootNodePtr());
+            displayedData += "\nSerialization ok";
+            displayedData += "\nSerialization string";
+            displayedData += "\n" + temp;
+            SaveToFile(outFilename, temp);
+            displayedData += "\nSerialization save to file ok";
+            break;
+	    case 'q':
 	        quit = true;
 	        break;
 	    }
 
 	    if(quit)break;
 	}
-
-//	if(ReadFromFile(inFilename, strFromFile))
-//	{
-//	    cout << "strFromFile: " << strFromFile << endl;
-//
-//	    if(strFromFile.length() > 0)
-//	    {
-//	        tree.Deserialization(nullptr, strFromFile);
-//	        string outData = tree.Serialization(tree.getRootNodePtr());
-//	        cout << "tree.Serialization = " << outData << endl;
-//	        SaveToFile(outFilename, outData);
-//
-//	        cout << tree.PrintTree() << endl;
-//	    }
-//	}
 
 	// --------------------------------------------
 
