@@ -99,12 +99,12 @@ int main(int argc, char *argv[])
 
 	    cout << logo << endl;
 
-	    cout << "\n(i)set input file name" << endl;
-	    cout << "(o)set output file name" << endl;
-	    cout << "(r)read from input file and deserealization" << endl;
-	    cout << "(s)serealization and write to output file" << endl;
-	    cout << "(p)print tree" << endl;
-	    cout << "(q)quit" << endl;
+	    cout << "\n(i) set input file name" << endl;
+	    cout << "(o) set output file name" << endl;
+	    cout << "(r) read from input file and deserialization" << endl;
+	    cout << "(s) serialization and write to output file" << endl;
+	    cout << "(p) print tree" << endl;
+	    cout << "(q) quit" << endl;
 
 	    cout << "\n" << displayedData << endl;
 	    displayedData = "";
