@@ -83,8 +83,14 @@ int main(int argc, char *argv[])
     // буфер для вывода информации на экран
 	string displayedData = "";
 
-	// проверка корректронсти параметров командной строки
-	if(argc == 3)
+	// простая проверка корректронсти параметров командной строки
+	if(argc == 2)
+	{
+        inFilename = argv[1];
+        displayedData += "\nInput file name: " + inFilename;
+        displayedData += "\nPleas enter input and output file names.\n";
+	}
+	else if(argc == 3)
 	{
         inFilename = argv[1];
         outFilename = argv[2];

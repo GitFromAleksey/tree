@@ -70,6 +70,7 @@ string Tree::Serialization(Node *node)
 string Tree::PrintTree(void)
 {
     string res = "";
+
     if(rootNode == nullptr)
     {
         return res;
@@ -80,24 +81,28 @@ string Tree::PrintTree(void)
     return res;
 }
 
-// обход дерева
+// обход дерева(рекурсивно)
 string Tree::TreeTraversal(Node *rootNode, unsigned int nestingLevel)
 {
     string res = "";
-    string indent = "";
-    unsigned int nes_lev = nestingLevel;
+    string indent = ""; //
+    unsigned int nes_lev = nestingLevel; // уровень вложенности
 
+    //
+    if(rootNode == nullptr){ return res; }
+
+    // добавляем отступы
     while(nes_lev > 0)
     {
         indent += " ";
         nes_lev--;
     }
 
-    if(rootNode == nullptr){return res;}
-
-    res = indent + "L" + rootNode->getTag() + ";";
+    // вывод содержимого узла
+    res = indent + rootNode->getTag() + ": ";
     res += rootNode->getVal() + "\n";
 
+    // проверка наличия SubNodes
     if(rootNode->getSubNodesCount() > 0)
     {
         vector<Node*> subNodes = rootNode->getSubNodes();
