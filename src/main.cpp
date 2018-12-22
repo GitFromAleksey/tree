@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
 	// --------------------------------------------
 
 	cout << "\nClose program\n" << endl;
-	system("pause");
+//	system("pause");
 
 	return 0;
 }

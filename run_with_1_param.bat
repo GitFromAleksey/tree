@@ -1,1 +1,1 @@
-C:\WorkSpace\Tree\Debug\tree.exe tree.ser
+.\Debug\tree.exe tree.ser
