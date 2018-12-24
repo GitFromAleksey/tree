@@ -17,26 +17,17 @@ using namespace std;
 
 enum DataType
 {
-	_TYPE_INT,
-	_TYPE_FLOAT,
-	_TYPE_STRING,
-	_TYPE_NULL
+    _TYPE_INT,
+    _TYPE_FLOAT,
+    _TYPE_STRING,
+    _TYPE_NULL
 };
 
 	class Node
 	{
 	public:
 
-		// TODO: убрать в private
-		DataType dataType;	// идентификатор хранимого типа данных
-		// TODO: убрать в private
-		void *pData;	// указатель на хранимые данные
-		// TODO: убрать в private
-		Node *pParent; // указатель на родителя
-		// TODO: убрать в private
-		vector<Node*> subNodes;	// список указателей на подноды
-
-		Node(){}
+        Node(){}
 		Node(const string &tag, const string &val);
 		Node(const Node *pParent, const string &tag, const string &val);
 		~Node(){}
@@ -71,8 +62,12 @@ enum DataType
 		const string tag_float = "float";
 		const string tag_string = "string";
 
-		DataType ConvertTagToDataType(const string &tag);
+        DataType dataType;  // идентификатор хранимого типа данных
+        void *pData;    // указатель на хранимые данные
+        Node *pParent; // указатель на родителя
+        vector<Node*> subNodes; // список указателей на подноды
 
+		DataType ConvertTagToDataType(const string &tag);
 	};
 
 

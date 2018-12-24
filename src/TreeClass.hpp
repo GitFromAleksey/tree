@@ -30,7 +30,6 @@ public:
 		return this->rootNode;
 	}
 
-	// TODO: сделать булевую для возврата результата серилиализации
 	void Deserialization(Node *pNode, const string str);
 
 	string Serialization(Node *node);
@@ -39,7 +38,6 @@ public:
 	string PrintTree(void);
 
 	// обход дерева
-//	string TreeTraversal(Node *rootNode, unsigned int nestingLevel);
 	string TreeTraversal(Node *rootNode, string indent);
 
 private:

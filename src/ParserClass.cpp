@@ -8,8 +8,6 @@
 #include "ParserClass.hpp"
 
 
-
-
 // извлекает все roots корни из строки
 vector<string> Parser::getRootsFromString(const string &parseStr)
 {
@@ -265,6 +263,4 @@ void Parser::CheckBracketsCount(const string &parseStr)
     {
         cout << "string NOT OK!" << endl;
     }
-
-    //        cout << "<- CheckBracketsCount" << endl;
 }
