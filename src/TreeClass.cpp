@@ -86,8 +86,8 @@ string Tree::TreeTraversal(Node *rootNode, string indent)
     if(rootNode == nullptr){ return res; }
 
     // вывод содержимого узла
-    res = rootNode->getTag() + ": ";
-    res += rootNode->getVal() + "\n";
+    res = "dataType=" + rootNode->getTag() + ", ";
+    res += "data=" + rootNode->getVal() + "\n";
 
     // проверка наличия SubNodes
     if(rootNode->getSubNodesCount() > 0)
