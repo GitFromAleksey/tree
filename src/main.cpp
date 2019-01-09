@@ -13,6 +13,8 @@
 #include "ParserClass.hpp"
 #include "NodeClass.hpp"
 
+#include <windows.h>
+
 using namespace std;
 
 const string logo = "\n   ___\n\
