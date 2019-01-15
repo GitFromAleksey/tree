@@ -175,10 +175,11 @@ vector<string> Parser::getSubNodesFromString(const string &parseStr)
 }
 
 // подсчитывает корневые Node-ы в строке
-int Parser::CountNodes(const string &parseStr)
+//unsigned int Parser::CountNodes(const string &parseStr)
+size_t Parser::CountNodes(const string &parseStr)
 {
     int bracketsCnt = 0;
-    int nodesCnt = 0;
+    size_t nodesCnt = 0;
     string str_loc = parseStr;
 
     if( !CheckParseString(parseStr) ) return 0;
@@ -199,7 +200,6 @@ int Parser::CountNodes(const string &parseStr)
 
 // проверка правильности формата строки
 // TODO: пока проверка только на крайние скобки
-// нужно сделать проверку на количество скобок
 bool Parser::CheckParseString(const string &parseStr)
 {
     bool res = true;

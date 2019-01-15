@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 	{
         inFilename = argv[1];
         displayedData += "\nInput file name: " + inFilename;
-        displayedData += "\nPleas enter input and output file names.\n";
+        displayedData += "\nPleas enter output file names.\n";
 	}
 	else if(argc == 3)
 	{
@@ -171,7 +171,8 @@ int main(int argc, char *argv[])
             }
             else
             {
-                displayedData += "\n" + tree.PrintTree();
+//                displayedData += "\n" + tree.PrintTree();
+                displayedData += "\n" + temp;
             }
             break;
         case 's':

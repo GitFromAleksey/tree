@@ -49,7 +49,8 @@ public:
     vector<string> getSubNodesFromString(const string &parseStr);
 
     // подсчитывает корневые Node-ы в строке
-    int CountNodes(const string &parseStr);
+//    unsigned int CountNodes(const string &parseStr);
+    size_t CountNodes(const string &parseStr);
 
     // проверка правильности формата строки
     // TODO: пока проверка только на крайние скобки
