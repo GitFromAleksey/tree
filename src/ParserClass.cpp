@@ -175,7 +175,6 @@ std::vector<std::string> Parser::getSubNodesFromString(const std::string &parseS
 }
 
 // подсчитывает корневые Node-ы в строке
-//unsigned int Parser::CountNodes(const string &parseStr)
 size_t Parser::CountNodes(const std::string &parseStr)
 {
     int bracketsCnt = 0;
@@ -199,7 +198,6 @@ size_t Parser::CountNodes(const std::string &parseStr)
 }
 
 // проверка правильности формата строки
-// TODO: пока проверка только на крайние скобки
 bool Parser::CheckParseString(const std::string &parseStr)
 {
     bool res = true;
@@ -214,7 +212,7 @@ bool Parser::CheckParseString(const std::string &parseStr)
 
     if(posLeftBr > 0)
     { res = false; }
-    if( (posRightBr+1) < str_loc.size() )
+    if( (posRightBr + 1) < str_loc.size() )
     { res = false; }
 
     for(unsigned int i = 0; i < str_loc.length(); i++)
@@ -230,7 +228,6 @@ bool Parser::CheckParseString(const std::string &parseStr)
     return res;
 }
 
-// TODO: недоделанный метод
 // проверяет количество открывающихся и закрывающихся скобок
 void Parser::CheckBracketsCount(const std::string &parseStr)
 {

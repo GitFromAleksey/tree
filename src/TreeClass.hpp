@@ -24,7 +24,7 @@ public:
 	}
 	~Tree(){}
 
-	Node *getRootNodePtr()
+	Node *getRootNodePtr() const
 	{
 		return this->rootNode;
 	}

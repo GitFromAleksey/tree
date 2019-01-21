@@ -50,7 +50,7 @@ Node::Node(const Node *pParent, const std::string &tag, const std::string &val)
     }
 }
 
-std::string Node::getVal()
+std::string Node::getVal() const
 {
     std::string res = "";
 
@@ -73,27 +73,44 @@ std::string Node::getVal()
     return res;
 }
 
-std::string Node::getTag()
+const std::string &Node::getTag() const
 {
-    std::string res = "";
 
     switch(dataType)
     {
     case _TYPE_INT:
-        res = tag_int;
-        break;
+        return tag_int;
     case _TYPE_FLOAT:
-        res = tag_float;
-        break;
+        return tag_float;
     case _TYPE_STRING:
-        res = tag_string;
-        break;
+        return tag_string;
     default:
-        break;
+        return tag_null;
     }
 
-    return res;
 }
+
+//std::string &Node::getTag() const
+//{
+//    std::string res = "";
+//
+//    switch(dataType)
+//    {
+//    case _TYPE_INT:
+//        res = tag_int;
+//        break;
+//    case _TYPE_FLOAT:
+//        res = tag_float;
+//        break;
+//    case _TYPE_STRING:
+//        res = tag_string;
+//        break;
+//    default:
+//        break;
+//    }
+//
+//    return res;
+//}
 
 DataType Node::ConvertTagToDataType(const std::string &tag)
 {

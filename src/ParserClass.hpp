@@ -27,7 +27,6 @@ public:
     ~Parser(){}
 
     // проверка количества скобок
-    // TODO: недоделанный метод
     void CheckBracketsCount(const std::string &parseStr);
 
     // извлекает все roots корни из строки

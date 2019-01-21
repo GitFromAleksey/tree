@@ -13,6 +13,10 @@
 #include <string>
 #include <vector>
 
+static const std::string tag_null = "";
+static const std::string tag_int = "int";
+static const std::string tag_float = "float";
+static const std::string tag_string = "string";
 
 enum DataType
 {
@@ -41,25 +45,25 @@ enum DataType
 			subNodes.push_back(node);
 		}
 
-		std::vector<Node*> getSubNodes()
+		std::vector<Node*> getSubNodes() const
 		{
 			return subNodes;
 		}
 
-		int getSubNodesCount()
+		int getSubNodesCount() const
 		{
 			return subNodes.size();
 		}
 
-		std::string getVal();
+		std::string getVal() const;
 
-		std::string getTag();
+		const std::string &getTag() const;
 
 	private:
 
-		const std::string tag_int = "int";
-		const std::string tag_float = "float";
-		const std::string tag_string = "string";
+//		const std::string tag_int = "int";
+//		const std::string tag_float = "float";
+//		const std::string tag_string = "string";
 
         DataType dataType;  // идентификатор хранимого типа данных
         void *pData;    // указатель на хранимые данные
