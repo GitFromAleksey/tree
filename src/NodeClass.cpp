@@ -7,7 +7,8 @@
 
 #include "NodeClass.hpp"
 
-Node::Node(const string &tag, const string &val)
+
+Node::Node(const std::string &tag, const std::string &val)
 {
     if(tag == tag_int)
     {
@@ -23,12 +24,12 @@ Node::Node(const string &tag, const string &val)
     }
     else if(tag == tag_string)
     {
-        pData = new string(val);
+        pData = new std::string(val);
         dataType = _TYPE_STRING;
     }
 }
 
-Node::Node(const Node *pParent, const string &tag, const string &val)
+Node::Node(const Node *pParent, const std::string &tag, const std::string &val)
 {
     if(tag == tag_int)
     {
@@ -44,37 +45,37 @@ Node::Node(const Node *pParent, const string &tag, const string &val)
     }
     else if(tag == tag_string)
     {
-        pData = new string(val);
+        pData = new std::string(val);
         dataType = _TYPE_STRING;
     }
 }
 
-string Node::getVal()
+std::string Node::getVal()
 {
-    string res = "";
+    std::string res = "";
 
     if(dataType == _TYPE_INT)
     {
         int i = *(int*)pData;
-        res = to_string(i);
+        res = std::to_string(i);
     }
     else if(dataType == _TYPE_FLOAT)
     {
         float f = *(float*)pData;
-        res = to_string(f);
+        res = std::to_string(f);
     }
     else if(dataType == _TYPE_STRING)
     {
-        string s = *(string*)pData;
+        std::string s = *(std::string*)pData;
         res = s;
     }
 
     return res;
 }
 
-string Node::getTag(void)
+std::string Node::getTag()
 {
-    string res = "";
+    std::string res = "";
 
     switch(dataType)
     {
@@ -94,7 +95,7 @@ string Node::getTag(void)
     return res;
 }
 
-DataType Node::ConvertTagToDataType(const string &tag)
+DataType Node::ConvertTagToDataType(const std::string &tag)
 {
     if(tag_int == tag)
     {

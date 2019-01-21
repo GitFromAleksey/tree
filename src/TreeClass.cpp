@@ -8,16 +8,16 @@
 #include "TreeClass.hpp"
 
 
-void Tree::Deserialization(Node *pNode, const string str)
+void Tree::Deserialization(Node *pNode, const std::string str)
 {
-	string str_loc = str;
+    std::string str_loc = str;
 	Parser parser;
 
 	if(this->rootNode == nullptr)
 	{
-		string dataStr = parser.getDataStringFromRoot(str_loc);
-		string tag = parser.getTagFromDataString(dataStr);
-		string val = parser.getValFromDataString(dataStr);
+	    std::string dataStr = parser.getDataStringFromRoot(str_loc);
+	    std::string tag = parser.getTagFromDataString(dataStr);
+	    std::string val = parser.getValFromDataString(dataStr);
 
 		this->rootNode = new Node(nullptr, tag, val);
 
@@ -25,13 +25,13 @@ void Tree::Deserialization(Node *pNode, const string str)
 	}
 	else
 	{
-		vector<string> subNodesStr = parser.getSubNodesFromString(str_loc);
+	    std::vector<std::string> subNodesStr = parser.getSubNodesFromString(str_loc);
 
 		for(unsigned int i = 0; i < subNodesStr.size(); i++)
 		{
-			string dataStr = parser.getDataStringFromRoot(subNodesStr[i]);
-			string tag = parser.getTagFromDataString(dataStr);
-			string val = parser.getValFromDataString(dataStr);
+		    std::string dataStr = parser.getDataStringFromRoot(subNodesStr[i]);
+		    std::string tag = parser.getTagFromDataString(dataStr);
+		    std::string val = parser.getValFromDataString(dataStr);
 
 			Node *subNode = new Node(pNode, tag, val);
 			pNode->AddSubNode(subNode);
@@ -44,15 +44,15 @@ void Tree::Deserialization(Node *pNode, const string str)
 	}
 }
 
-string Tree::Serialization(Node *node)
+std::string Tree::Serialization(Node *node)
 {
-	string str_res = "";
+    std::string str_res = "";
 
 	if(node == nullptr)return str_res;
 
 	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
-	vector<Node*> subNodes = node->getSubNodes();
+	std::vector<Node*> subNodes = node->getSubNodes();
 	for(unsigned int i = 0; i < subNodes.size(); i++)
 	{
 		str_res += Serialization(subNodes[i]);
@@ -63,9 +63,9 @@ string Tree::Serialization(Node *node)
 	return str_res;
 }
 
-string Tree::PrintTree(void)
+std::string Tree::PrintTree()
 {
-    string res = "";
+    std::string res = "";
 
     if(rootNode == nullptr)
     {
@@ -78,9 +78,9 @@ string Tree::PrintTree(void)
 }
 
 // обход дерева(рекурсивно)
-string Tree::TreeTraversal(Node *rootNode, string indent)
+std::string Tree::TreeTraversal(Node *rootNode, std::string indent)
 {
-    string res = "";
+    std::string res = "";
 
     //
     if(rootNode == nullptr){ return res; }
@@ -92,7 +92,7 @@ string Tree::TreeTraversal(Node *rootNode, string indent)
     // проверка наличия SubNodes
     if(rootNode->getSubNodesCount() > 0)
     {
-        vector<Node*> subNodes = rootNode->getSubNodes();
+        std::vector<Node*> subNodes = rootNode->getSubNodes();
 
         indent += "|";
 

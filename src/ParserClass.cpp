@@ -9,15 +9,15 @@
 
 
 // извлекает все roots корни из строки
-vector<string> Parser::getRootsFromString(const string &parseStr)
+std::vector<std::string> Parser::getRootsFromString(const std::string &parseStr)
 {
     int bracketsCnt = 0;
     int nodesCnt = 0;
-    string str_loc = parseStr;
+    std::string str_loc = parseStr;
     int openPos = -1;
     int closePos = -1;
-    string node = "";
-    vector<string> vStr;
+    std::string node = "";
+    std::vector<std::string> vStr;
 
     if( !CheckParseString(parseStr) ) return vStr;
 
@@ -50,10 +50,10 @@ vector<string> Parser::getRootsFromString(const string &parseStr)
 }
 
 // извлекает из корня поле с данными
-string Parser::getDataStringFromRoot(const string &parseStr)
+std::string Parser::getDataStringFromRoot(const std::string &parseStr)
 {
-    string str_loc = parseStr;
-    string rootDataStr = "";
+    std::string str_loc = parseStr;
+    std::string rootDataStr = "";
     int pos = -1;
 
     if( !CheckParseString(parseStr) ) return rootDataStr;
@@ -82,11 +82,11 @@ string Parser::getDataStringFromRoot(const string &parseStr)
 }
 
 // возвращает поле "tag" из поля данных
-string Parser::getTagFromDataString(const string &dataStr)
+std::string Parser::getTagFromDataString(const std::string &dataStr)
 {
     int pos = -1;
-    string str_loc = dataStr;
-    string resTag = "";
+    std::string str_loc = dataStr;
+    std::string resTag = "";
 
     pos = str_loc.find(tag, 0);
     if(pos > -1)
@@ -106,11 +106,11 @@ string Parser::getTagFromDataString(const string &dataStr)
 // возвращает поле "val" из поля данных
 // TODO: найден баг. Если отправить не строку с выделенными данными, астроку целиком,
 // то возвращает строку со всеми нодами до конца строки
-string Parser::getValFromDataString(const string &dataStr)
+std::string Parser::getValFromDataString(const std::string &dataStr)
 {
     int pos = -1;
-    string str_loc = dataStr;
-    string resVal = "";
+    std::string str_loc = dataStr;
+    std::string resVal = "";
 
     pos = str_loc.find(val,0);
 
@@ -129,13 +129,13 @@ string Parser::getValFromDataString(const string &dataStr)
 }
 
 // возвращает список под нодов
-vector<string> Parser::getSubNodesFromString(const string &parseStr)
+std::vector<std::string> Parser::getSubNodesFromString(const std::string &parseStr)
 {
     int pos = -1;
     int bracketsCnt = 0;
-    string str_loc = parseStr;
-    string nodaStr = "";
-    vector<string> vectorRes;
+    std::string str_loc = parseStr;
+    std::string nodaStr = "";
+    std::vector<std::string> vectorRes;
 
     if( !CheckParseString(parseStr) )return vectorRes;
 
@@ -176,11 +176,11 @@ vector<string> Parser::getSubNodesFromString(const string &parseStr)
 
 // подсчитывает корневые Node-ы в строке
 //unsigned int Parser::CountNodes(const string &parseStr)
-size_t Parser::CountNodes(const string &parseStr)
+size_t Parser::CountNodes(const std::string &parseStr)
 {
     int bracketsCnt = 0;
     size_t nodesCnt = 0;
-    string str_loc = parseStr;
+    std::string str_loc = parseStr;
 
     if( !CheckParseString(parseStr) ) return 0;
 
@@ -200,14 +200,14 @@ size_t Parser::CountNodes(const string &parseStr)
 
 // проверка правильности формата строки
 // TODO: пока проверка только на крайние скобки
-bool Parser::CheckParseString(const string &parseStr)
+bool Parser::CheckParseString(const std::string &parseStr)
 {
     bool res = true;
 
     int bracketsCnt = 0;
     int posRightBr = -1;
     int posLeftBr = -1;
-    string str_loc = parseStr;
+    std::string str_loc = parseStr;
 
     posLeftBr = str_loc.find(leftBracket, 0);
     posRightBr = str_loc.rfind(rightBracket, str_loc.size());
@@ -232,14 +232,14 @@ bool Parser::CheckParseString(const string &parseStr)
 
 // TODO: недоделанный метод
 // проверяет количество открывающихся и закрывающихся скобок
-void Parser::CheckBracketsCount(const string &parseStr)
+void Parser::CheckBracketsCount(const std::string &parseStr)
 {
     int pos = -1;
     int bracketsCnt = 0;
     int leftBracketsCnt = 0;
     int rightBracketsCnt = 0;
 
-    string str_loc = parseStr;
+    std::string str_loc = parseStr;
 
     while( (pos = str_loc.find(leftBracket, 0)) != -1 )
     {
@@ -257,10 +257,10 @@ void Parser::CheckBracketsCount(const string &parseStr)
 
     if(bracketsCnt == 0)
     {
-        cout << "string OK!" << endl;
+        std::cout << "string OK!" << std::endl;
     }
     else
     {
-        cout << "string NOT OK!" << endl;
+        std::cout << "string NOT OK!" << std::endl;
     }
 }

@@ -13,7 +13,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
 enum DataType
 {
@@ -28,8 +27,8 @@ enum DataType
 	public:
 
         Node(){}
-		Node(const string &tag, const string &val);
-		Node(const Node *pParent, const string &tag, const string &val);
+		Node(const std::string &tag, const std::string &val);
+		Node(const Node *pParent, const std::string &tag, const std::string &val);
 		~Node(){}
 
 		void AddParent(Node *pParent)
@@ -42,32 +41,32 @@ enum DataType
 			subNodes.push_back(node);
 		}
 
-		vector<Node*> getSubNodes(void)
+		std::vector<Node*> getSubNodes()
 		{
 			return subNodes;
 		}
 
-		int getSubNodesCount(void)
+		int getSubNodesCount()
 		{
 			return subNodes.size();
 		}
 
-		string getVal(void);
+		std::string getVal();
 
-		string getTag(void);
+		std::string getTag();
 
 	private:
 
-		const string tag_int = "int";
-		const string tag_float = "float";
-		const string tag_string = "string";
+		const std::string tag_int = "int";
+		const std::string tag_float = "float";
+		const std::string tag_string = "string";
 
         DataType dataType;  // идентификатор хранимого типа данных
         void *pData;    // указатель на хранимые данные
         Node *pParent; // указатель на родителя
-        vector<Node*> subNodes; // список указателей на подноды
+        std::vector<Node*> subNodes; // список указателей на подноды
 
-		DataType ConvertTagToDataType(const string &tag);
+		DataType ConvertTagToDataType(const std::string &tag);
 	};
 
 

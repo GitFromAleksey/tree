@@ -14,7 +14,6 @@
 #include "NodeClass.hpp"
 #include "ParserClass.hpp"
 
-using namespace std;
 
 class Tree
 {
@@ -25,26 +24,26 @@ public:
 	}
 	~Tree(){}
 
-	Node *getRootNodePtr(void)
+	Node *getRootNodePtr()
 	{
 		return this->rootNode;
 	}
 
-	void Deserialization(Node *pNode, const string str);
+	void Deserialization(Node *pNode, const std::string str);
 
-	string Serialization(Node *node);
+	std::string Serialization(Node *node);
 
 	// печать дерева
-	string PrintTree(void);
+	std::string PrintTree();
 
 	// обход дерева
-	string TreeTraversal(Node *rootNode, string indent);
+	std::string TreeTraversal(Node *rootNode, std::string indent);
 
 private:
 
-	const string tag_int = "int";
-	const string tag_float = "float";
-	const string tag_string = "string";
+	const std::string tag_int = "int";
+	const std::string tag_float = "float";
+	const std::string tag_string = "string";
 
 	Node *rootNode;
 
