@@ -47,7 +47,6 @@ public:
     std::vector<std::string> getSubNodesFromString(const std::string &parseStr);
 
     // подсчитывает корневые Node-ы в строке
-//    unsigned int CountNodes(const string &parseStr);
     size_t CountNodes(const std::string &parseStr);
 
     // проверка правильности формата строки

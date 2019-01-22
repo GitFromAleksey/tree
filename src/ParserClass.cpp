@@ -21,7 +21,7 @@ std::vector<std::string> Parser::getRootsFromString(const std::string &parseStr)
 
     if( !CheckParseString(parseStr) ) return vStr;
 
-    for(unsigned int i = 0; i < str_loc.length(); i++)
+    for(size_t i = 0; i < str_loc.length(); i++)
     {
         if(str_loc.substr(i, 1) == leftBracket)
         {
@@ -149,7 +149,7 @@ std::vector<std::string> Parser::getSubNodesFromString(const std::string &parseS
     str_loc.erase(0, pos);
 
     pos = -1;
-    for(unsigned int i = 0; i < str_loc.length(); i++)
+    for(size_t i = 0; i < str_loc.length(); i++)
     {
         // считаем открывающиеся и закрывающиеся скобки
         if(str_loc.substr(i, 1) == leftBracket)
@@ -183,7 +183,7 @@ size_t Parser::CountNodes(const std::string &parseStr)
 
     if( !CheckParseString(parseStr) ) return 0;
 
-    for(unsigned int i = 0; i < str_loc.length(); i++)
+    for(size_t i = 0; i < str_loc.length(); i++)
     {
         if(str_loc.substr(i, 1) == leftBracket)
         { bracketsCnt++; }
@@ -212,10 +212,10 @@ bool Parser::CheckParseString(const std::string &parseStr)
 
     if(posLeftBr > 0)
     { res = false; }
-    if( (posRightBr + 1) < str_loc.size() )
+    if( (size_t)(posRightBr + 1) < str_loc.size() )
     { res = false; }
 
-    for(unsigned int i = 0; i < str_loc.length(); i++)
+    for(size_t i = 0; i < str_loc.length(); i++)
     {
         if(str_loc.substr(i, 1) == leftBracket)
         { bracketsCnt++; }

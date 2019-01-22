@@ -27,7 +27,7 @@ void Tree::Deserialization(Node *pNode, const std::string str)
 	{
 	    std::vector<std::string> subNodesStr = parser.getSubNodesFromString(str_loc);
 
-		for(unsigned int i = 0; i < subNodesStr.size(); i++)
+		for(size_t i = 0; i < subNodesStr.size(); i++)
 		{
 		    std::string dataStr = parser.getDataStringFromRoot(subNodesStr[i]);
 		    std::string tag = parser.getTagFromDataString(dataStr);
@@ -53,7 +53,7 @@ std::string Tree::Serialization(Node *node)
 	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
 	std::vector<Node*> subNodes = node->getSubNodes();
-	for(unsigned int i = 0; i < subNodes.size(); i++)
+	for(size_t i = 0; i < subNodes.size(); i++)
 	{
 		str_res += Serialization(subNodes[i]);
 	}
@@ -96,7 +96,7 @@ std::string Tree::TreeTraversal(Node *rootNode, std::string indent)
 
         indent += "|";
 
-        for(unsigned int i = 0; i < subNodes.size(); i++)
+        for(size_t i = 0; i < subNodes.size(); i++)
         {
             res += indent + "->" + TreeTraversal(subNodes[i], (indent+"  "));
         }
