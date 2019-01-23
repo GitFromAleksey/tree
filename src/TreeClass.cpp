@@ -8,7 +8,7 @@
 #include "TreeClass.hpp"
 
 
-void Tree::Deserialization(Node *pNode, const std::string str)
+void Tree::Deserialization(Node *pNode, const std::string &str)
 {
     std::string str_loc = str;
 	Parser parser;

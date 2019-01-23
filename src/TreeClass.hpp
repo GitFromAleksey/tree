@@ -29,7 +29,7 @@ public:
 		return this->rootNode;
 	}
 
-	void Deserialization(Node *pNode, const std::string str);
+	void Deserialization(Node *pNode, const std::string &str);
 
 	std::string Serialization(Node *node);
 
