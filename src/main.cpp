@@ -6,14 +6,14 @@
  */
 #include <iostream>
 #include <fstream>
-#include <typeinfo>
+//#include <typeinfo>
 #include <string>
 
 #include "TreeClass.hpp"
 #include "ParserClass.hpp"
 #include "NodeClass.hpp"
 
-#include <windows.h>
+//#include <windows.h>
 
 using namespace std;
 
