@@ -39,6 +39,8 @@ public:
 	// обход дерева
 	std::string TreeTraversal(Node *rootNode, std::string indent);
 
+	void ClearTree(Node *pNode);
+
 private:
 
 	const std::string tag_int = "int";

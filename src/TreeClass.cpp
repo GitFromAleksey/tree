@@ -53,6 +53,9 @@ std::string Tree::Serialization(Node *node)
 	str_res += "[tag=" + node->getTag() + ",val=" + node->getVal();
 
 	std::vector<Node*> subNodes = node->getSubNodes();
+
+	delete node; // освобождение памяти
+
 	for(size_t i = 0; i < subNodes.size(); i++)
 	{
 		str_res += Serialization(subNodes[i]);
@@ -105,3 +108,24 @@ std::string Tree::TreeTraversal(Node *rootNode, std::string indent)
     return res;
 }
 
+void Tree::ClearTree(Node *pNode)
+{
+    if(pNode == nullptr)
+    {
+        if(rootNode != nullptr)
+        {
+            ClearTree(rootNode);
+        }
+    }
+    else
+    {
+        std::vector<Node*> subNodes = pNode->getSubNodes();
+        std::cout << "pNode.Tag = " << pNode->getTag() << "; pNode.Val = " << pNode->getVal() << std::endl;
+        delete pNode;
+        for(size_t i = 0; i < pNode->getSubNodesCount(); i++)
+        {
+            ClearTree(subNodes[i]);
+        }
+
+    }
+}
