@@ -54,7 +54,7 @@ std::string Tree::Serialization(Node *node)
 
 	std::vector<Node*> subNodes = node->getSubNodes();
 
-	delete node; // освобождение памяти
+	delete node; // освобождение памяти для каждого узла дерева
 
 	for(size_t i = 0; i < subNodes.size(); i++)
 	{
@@ -62,6 +62,11 @@ std::string Tree::Serialization(Node *node)
 	}
 
 	str_res += "]";
+
+	// так как память под корень освобождёна,
+	// приравниваем указатель на корень = nullptr,
+	// чтобы программа не обращалась к этому месту
+	rootNode = nullptr;
 
 	return str_res;
 }

@@ -186,16 +186,16 @@ int main(int argc, char *argv[])
 
                 if(SaveToFile(outFilename, temp))
                 {
-                    displayedData += "\nSerialization save to file ok";
+                    displayedData += "\nSerialization. Save to file ok";
                 }
                 else
                 {
-                    displayedData += "\nSerialization save to file error";
+                    displayedData += "\nSerialization. Save to file error";
                 }
             }
             else
             {
-                displayedData += "\nSerialization error";
+                displayedData += "\nNothing to serialize";
             }
             break;
 	    case 'q':

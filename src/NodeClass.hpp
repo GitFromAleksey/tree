@@ -50,7 +50,7 @@ enum DataType
 			return subNodes;
 		}
 
-		int getSubNodesCount() const
+		size_t getSubNodesCount() const
 		{
 			return subNodes.size();
 		}
