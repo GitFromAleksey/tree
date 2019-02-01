@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 
                 if(strFromFile.length() > 0)
                 {
-                    tree.Deserialization(nullptr, strFromFile);
+                    tree.Deserialization(strFromFile);
                     displayedData += "\nDeserialization ok";
                 }
                 else

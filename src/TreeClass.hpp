@@ -29,7 +29,10 @@ public:
 		return this->rootNode;
 	}
 
-	void Deserialization(Node *pNode, const std::string &str);
+	void Deserialization(const std::string &str)
+	{
+	    Deserialization(nullptr, str);
+	}
 
 	std::string Serialization(Node *node);
 
@@ -48,6 +51,8 @@ private:
 	const std::string tag_string = "string";
 
 	Node *rootNode;
+
+    void Deserialization(Node *pNode, const std::string &str);
 
 };
 
