@@ -171,7 +171,6 @@ int main(int argc, char *argv[])
             }
             else
             {
-//                displayedData += "\n" + tree.PrintTree();
                 displayedData += "\n" + temp;
             }
             break;
